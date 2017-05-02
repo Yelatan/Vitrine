@@ -47,7 +47,7 @@ class NewsTableView: VTableViewWrapper {
             selectionStyle = UITableViewCellSelectionStyle.none
             titelLabel.text = news.name
             
-            //didn't fix
+            //didn't fix the size is too large
 //            if news.networkLogo != nil {
 //                logoView.imageURL = API.imageURL("networks/logo", string: news.networkLogo!)
 //                logoView.imageURL = API.imageURL("networks/logo", string: "Nkzb_YKaM.png")

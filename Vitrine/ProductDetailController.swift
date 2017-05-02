@@ -276,7 +276,7 @@ class ImagePagerCell: UICollectionViewCell, UIScrollViewDelegate {
         didSet {
             
             imageView.sd_setImage(with: imageURL) { (image, error, imageCacheType, url) in
-                //didn't fix                
+                //didn't fix, because of the image is does not exist                 
 //                let zoomScale = max(self.bounds.size.width / (image?.size.width)!, self.bounds.size.height / (image?.size.height)!)
                 let zoomScale: CGFloat = 100
                 if (zoomScale > 1) {
