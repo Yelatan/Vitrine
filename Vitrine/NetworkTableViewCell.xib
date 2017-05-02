@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NetworkTableViewCell" customModule="Vitrine" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworkTableViewCell" rowHeight="200" id="N3d-uI-yJM" userLabel="ZOZO" customClass="NetworkTableViewCell" customModule="Vitrine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N3d-uI-yJM" id="D85-CZ-O8C">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h54-n5-maw">
+                        <rect key="frame" x="0.0" y="139" width="320" height="60"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alx-TQ-leq" customClass="RoundLogoView" customModule="Vitrine" customModuleProvider="target">
+                                <rect key="frame" x="8" y="7" width="45" height="45"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="5dj-eb-mhq"/>
+                                    <constraint firstAttribute="height" constant="45" id="BIO-ei-1Eo"/>
+                                    <constraint firstAttribute="width" constant="45" id="NRL-xw-XdK"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="l3f-Dr-4ic"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="lio-zX-diF"/>
+                                    <constraint firstAttribute="height" constant="45" id="oMI-Iq-7Hn"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NRL-xw-XdK"/>
+                                        <exclude reference="l3f-Dr-4ic"/>
+                                        <exclude reference="lio-zX-diF"/>
+                                        <exclude reference="oMI-Iq-7Hn"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(╯°□°）╯︵ ┻━┻" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqb-ss-gF8">
+                                <rect key="frame" x="63" y="13" width="186" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Na0-3X-FGz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Na0-3X-FGz"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.1 КМ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDV-rT-2H9">
+                                <rect key="frame" x="254" y="19" width="66" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="7aC-k5-qY0"/>
+                                    <constraint firstAttribute="height" constant="21" id="J7m-Hi-e8i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqI-Zz-AQ5">
+                                <rect key="frame" x="63" y="32" width="186" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Qqb-ss-gF8" firstAttribute="top" secondItem="h54-n5-maw" secondAttribute="top" constant="5" id="18O-9g-QLW"/>
+                            <constraint firstItem="fDV-rT-2H9" firstAttribute="centerY" secondItem="h54-n5-maw" secondAttribute="centerY" id="4MK-6z-BFr"/>
+                            <constraint firstAttribute="trailing" secondItem="fDV-rT-2H9" secondAttribute="trailing" id="Egg-SX-QTe"/>
+                            <constraint firstItem="Qqb-ss-gF8" firstAttribute="leading" secondItem="h54-n5-maw" secondAttribute="leading" constant="63" id="Hm1-az-X5P"/>
+                            <constraint firstAttribute="bottom" secondItem="SqI-Zz-AQ5" secondAttribute="bottom" constant="5" id="JqX-hf-TPb"/>
+                            <constraint firstItem="fDV-rT-2H9" firstAttribute="leading" secondItem="SqI-Zz-AQ5" secondAttribute="trailing" constant="5" id="K1E-BE-LQD"/>
+                            <constraint firstItem="Qqb-ss-gF8" firstAttribute="centerY" secondItem="h54-n5-maw" secondAttribute="centerY" constant="-8" id="ThV-ue-aet"/>
+                            <constraint firstItem="alx-TQ-leq" firstAttribute="leading" secondItem="h54-n5-maw" secondAttribute="leadingMargin" id="X8v-yC-Ddh"/>
+                            <constraint firstItem="SqI-Zz-AQ5" firstAttribute="leading" secondItem="h54-n5-maw" secondAttribute="leading" constant="63" id="cqa-m9-1NM"/>
+                            <constraint firstItem="alx-TQ-leq" firstAttribute="centerY" secondItem="h54-n5-maw" secondAttribute="centerY" id="dj6-rd-2aX"/>
+                            <constraint firstItem="fDV-rT-2H9" firstAttribute="leading" secondItem="Qqb-ss-gF8" secondAttribute="trailing" constant="5" id="hpc-Ow-89J"/>
+                            <constraint firstItem="SqI-Zz-AQ5" firstAttribute="top" secondItem="Qqb-ss-gF8" secondAttribute="bottom" constant="1" id="slo-KN-qU8"/>
+                            <constraint firstAttribute="height" constant="60" id="ttq-Jg-I3g"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="18O-9g-QLW"/>
+                                <exclude reference="JqX-hf-TPb"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="rr4-V2-uiM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" red="0.13687513768672943" green="0.16892725229263306" blue="0.22968737781047821" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="h54-n5-maw" firstAttribute="top" secondItem="D85-CZ-O8C" secondAttribute="top" constant="60" id="0tv-8H-9wH"/>
+                    <constraint firstAttribute="bottom" secondItem="rr4-V2-uiM" secondAttribute="bottom" constant="60" id="3JG-pR-axb"/>
+                    <constraint firstItem="rr4-V2-uiM" firstAttribute="top" secondItem="D85-CZ-O8C" secondAttribute="top" id="7fC-1e-uNL"/>
+                    <constraint firstItem="rr4-V2-uiM" firstAttribute="leading" secondItem="D85-CZ-O8C" secondAttribute="leading" id="M8u-S1-Ghb"/>
+                    <constraint firstAttribute="trailing" secondItem="h54-n5-maw" secondAttribute="trailing" id="Si8-Ne-hbW"/>
+                    <constraint firstItem="h54-n5-maw" firstAttribute="leading" secondItem="D85-CZ-O8C" secondAttribute="leading" id="a5V-7j-3so"/>
+                    <constraint firstAttribute="trailing" secondItem="rr4-V2-uiM" secondAttribute="trailing" id="vbX-Fz-RtS"/>
+                    <constraint firstAttribute="bottom" secondItem="h54-n5-maw" secondAttribute="bottom" constant="0.5" id="yXj-9L-O4v"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="0tv-8H-9wH"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bgImageView" destination="rr4-V2-uiM" id="931-nB-75E"/>
+                <outlet property="detailLabel" destination="SqI-Zz-AQ5" id="SrS-Nv-buH"/>
+                <outlet property="logoView" destination="alx-TQ-leq" id="kYo-U0-Mpe"/>
+                <outlet property="rangeLabel" destination="fDV-rT-2H9" id="gxR-sp-xbH"/>
+                <outlet property="titleLabel" destination="Qqb-ss-gF8" id="6uH-Qe-9xz"/>
+            </connections>
+            <point key="canvasLocation" x="454" y="529"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ryba_big_photo" width="722" height="450"/>
+    </resources>
+</document>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsTableViewCell" rowHeight="200" id="pkh-AY-euR" customClass="NewsTableViewCell" customModule="Vitrine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pkh-AY-euR" id="CIM-kN-CMz">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="FNT-Lj-AJh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14a-Ko-ix4">
+                        <rect key="frame" x="0.0" y="139" width="320" height="60"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Df-AG-zjZ" customClass="RoundLogoView" customModule="Vitrine" customModuleProvider="target">
+                                <rect key="frame" x="8" y="8" width="45" height="45"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="NZY-2Q-YNN"/>
+                                    <constraint firstAttribute="width" constant="45" id="hZe-bp-l90"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рекламная акция: &quot;Рюкзаки BACK to SCHOOL&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gek-Ct-eqe" userLabel="Title">
+                                <rect key="frame" x="63" y="4.5" width="249" height="33.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="ijk-Aw-DTV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" red="0.039215686270000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ijk-Aw-DTV"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="45 мин назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRB-0B-iMQ" userLabel="Detail">
+                                <rect key="frame" x="63" y="39" width="80" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.63529411759999999" green="0.63529411759999999" blue="0.63529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gek-Ct-eqe" firstAttribute="leading" secondItem="14a-Ko-ix4" secondAttribute="leading" constant="63" id="L0X-5d-5z3"/>
+                            <constraint firstItem="dRB-0B-iMQ" firstAttribute="leading" secondItem="14a-Ko-ix4" secondAttribute="leading" constant="63" id="WYW-FK-5rB"/>
+                            <constraint firstItem="8Df-AG-zjZ" firstAttribute="leading" secondItem="14a-Ko-ix4" secondAttribute="leadingMargin" id="azw-ZS-pbV"/>
+                            <constraint firstItem="gek-Ct-eqe" firstAttribute="centerY" secondItem="14a-Ko-ix4" secondAttribute="centerY" constant="-9" id="kLq-a5-TlY"/>
+                            <constraint firstItem="8Df-AG-zjZ" firstAttribute="centerY" secondItem="14a-Ko-ix4" secondAttribute="centerY" id="n2Z-Ao-jJi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gek-Ct-eqe" secondAttribute="trailing" id="n3D-r9-5Ce"/>
+                            <constraint firstItem="dRB-0B-iMQ" firstAttribute="top" secondItem="gek-Ct-eqe" secondAttribute="bottom" constant="1" id="op2-kl-s06"/>
+                            <constraint firstAttribute="height" constant="60" id="qRA-TP-dbC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.13687513768672943" green="0.16892725229263306" blue="0.22968737781047821" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="14a-Ko-ix4" secondAttribute="bottom" id="CBJ-Nf-tUS"/>
+                    <constraint firstItem="14a-Ko-ix4" firstAttribute="centerX" secondItem="CIM-kN-CMz" secondAttribute="centerX" id="FR7-hN-trW"/>
+                    <constraint firstItem="FNT-Lj-AJh" firstAttribute="leading" secondItem="CIM-kN-CMz" secondAttribute="leading" id="Hbx-eb-LfF"/>
+                    <constraint firstItem="FNT-Lj-AJh" firstAttribute="top" secondItem="CIM-kN-CMz" secondAttribute="top" id="RG0-0P-abj"/>
+                    <constraint firstItem="14a-Ko-ix4" firstAttribute="width" secondItem="CIM-kN-CMz" secondAttribute="width" id="WXP-uc-8xa"/>
+                    <constraint firstAttribute="trailing" secondItem="FNT-Lj-AJh" secondAttribute="trailing" id="a8d-LU-OKn"/>
+                    <constraint firstAttribute="bottom" secondItem="FNT-Lj-AJh" secondAttribute="bottom" constant="60" id="bTS-3C-LZF"/>
+                    <constraint firstItem="14a-Ko-ix4" firstAttribute="leading" secondItem="CIM-kN-CMz" secondAttribute="leading" id="clG-mg-L76"/>
+                    <constraint firstItem="14a-Ko-ix4" firstAttribute="top" secondItem="CIM-kN-CMz" secondAttribute="top" constant="129" id="em2-cF-P7j"/>
+                    <constraint firstAttribute="trailing" secondItem="14a-Ko-ix4" secondAttribute="trailing" id="q7e-WK-aaG"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="clG-mg-L76"/>
+                        <exclude reference="em2-cF-P7j"/>
+                        <exclude reference="q7e-WK-aaG"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="detailLabel" destination="dRB-0B-iMQ" id="ir2-Mh-lER"/>
+                <outlet property="logoView" destination="8Df-AG-zjZ" id="NUI-Qb-0eb"/>
+                <outlet property="picView" destination="FNT-Lj-AJh" id="t5p-YX-gIw"/>
+                <outlet property="titelLabel" destination="gek-Ct-eqe" id="F94-dt-7Ex"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ryba_big_photo" width="722" height="450"/>
+    </resources>
+</document>

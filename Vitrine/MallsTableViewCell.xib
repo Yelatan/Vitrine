@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MallsTableViewCell" rowHeight="270" id="Ki7-jM-v4j" customClass="MallsTableViewCell" customModule="Vitrine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ki7-jM-v4j" id="gQG-fK-0F0">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="269.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="DBV-fO-PbQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="209"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHE-TY-oRf">
+                        <rect key="frame" x="0.0" y="209" width="320" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 мин назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMf-2T-EJL">
+                                <rect key="frame" x="8" y="30" width="87" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEGA Park" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lA-3W-w8d">
+                                <rect key="frame" x="8" y="12" width="87" height="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfA-GP-8gl">
+                                <rect key="frame" x="100" y="19" width="212" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="cBE-kp-OKZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="3lA-3W-w8d" secondAttribute="trailing" priority="750" constant="5" id="4ac-as-bUt"/>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="dMf-2T-EJL" secondAttribute="trailing" constant="5" id="AEZ-Ed-awy"/>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="dMf-2T-EJL" secondAttribute="trailing" constant="5" id="CZg-h8-fg4"/>
+                            <constraint firstItem="dMf-2T-EJL" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="8" id="Lmh-qc-xix"/>
+                            <constraint firstItem="3lA-3W-w8d" firstAttribute="centerY" secondItem="SHE-TY-oRf" secondAttribute="centerY" constant="-8" id="Nfe-as-M5U"/>
+                            <constraint firstItem="3lA-3W-w8d" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="8" id="PtP-7F-fHc"/>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="centerY" secondItem="SHE-TY-oRf" secondAttribute="centerY" id="WA7-Oy-Hcr"/>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="3lA-3W-w8d" secondAttribute="trailing" constant="5" id="XM6-gR-WXY"/>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="dMf-2T-EJL" secondAttribute="trailing" priority="750" constant="5" id="bMg-8r-whZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dfA-GP-8gl" secondAttribute="trailing" id="qoV-zb-89S"/>
+                            <constraint firstItem="dMf-2T-EJL" firstAttribute="top" secondItem="3lA-3W-w8d" secondAttribute="bottom" constant="-2" id="xZE-PL-qav"/>
+                            <constraint firstAttribute="height" constant="60" id="xj5-MM-uRX"/>
+                            <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="3lA-3W-w8d" secondAttribute="trailing" constant="8" id="yF8-MN-HLD"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4ac-as-bUt"/>
+                                <exclude reference="AEZ-Ed-awy"/>
+                                <exclude reference="bMg-8r-whZ"/>
+                                <exclude reference="yF8-MN-HLD"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DBV-fO-PbQ" firstAttribute="leading" secondItem="gQG-fK-0F0" secondAttribute="leading" id="Jds-n3-xVO"/>
+                    <constraint firstItem="SHE-TY-oRf" firstAttribute="top" secondItem="gQG-fK-0F0" secondAttribute="top" constant="129" id="V4o-VJ-CIz"/>
+                    <constraint firstAttribute="bottom" secondItem="SHE-TY-oRf" secondAttribute="bottom" id="VZv-fD-1NG"/>
+                    <constraint firstItem="DBV-fO-PbQ" firstAttribute="top" secondItem="gQG-fK-0F0" secondAttribute="top" id="ZIA-63-d78"/>
+                    <constraint firstAttribute="trailing" secondItem="SHE-TY-oRf" secondAttribute="trailing" id="aPy-Wa-gQS"/>
+                    <constraint firstItem="SHE-TY-oRf" firstAttribute="leading" secondItem="gQG-fK-0F0" secondAttribute="leading" id="lmz-Z8-AS6"/>
+                    <constraint firstAttribute="trailing" secondItem="DBV-fO-PbQ" secondAttribute="trailing" id="m2X-Cx-Bka"/>
+                    <constraint firstAttribute="bottom" secondItem="DBV-fO-PbQ" secondAttribute="bottom" constant="60" id="uWp-jV-vy8"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="V4o-VJ-CIz"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detailLabel" destination="dMf-2T-EJL" id="p4f-L1-YV9"/>
+                <outlet property="picView" destination="DBV-fO-PbQ" id="b6l-ZO-ATe"/>
+                <outlet property="rangeLabel" destination="dfA-GP-8gl" id="ZDM-Rg-yn3"/>
+                <outlet property="titleLabel" destination="3lA-3W-w8d" id="K91-21-dhd"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ryba_big_photo" width="722" height="450"/>
+    </resources>
+</document>
