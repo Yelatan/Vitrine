@@ -1,0 +1,6 @@
+framework module Pods_Vitrine {
+  umbrella header "Pods-Vitrine-umbrella.h"
+
+  export *
+  module * { export * }
+}
