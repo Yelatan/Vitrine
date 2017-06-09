@@ -28,7 +28,7 @@ class FavoritesController: UIViewController, VTableViewDelegate, ProductsTableVi
     var displayMode = DisplayMode.grid
     var searchParams = ProductSearchParams()
     var page = 1
-    var pageSize = 5
+    var pageSize = 9999
     var searchString = ""
     
     func refreshList() {
@@ -87,6 +87,10 @@ class FavoritesController: UIViewController, VTableViewDelegate, ProductsTableVi
     func vTableViewDidRequestMoreData() {
         let url = "users/favorite-products"
         var headers = [String: String]()
+        if (GlobalConstants.Person.hasToken()) {
+            headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         let params = VitrineParams()
         
         headers["page"] = "\(page)"
@@ -105,15 +109,10 @@ class FavoritesController: UIViewController, VTableViewDelegate, ProductsTableVi
         }
         //request = Alamofire.request(url, parameters: params.get(), headers: headers).responseJSON { response in
         //"http://apivitrine.witharts.kz/api/\(url!)", parameters:params.get(),encoding:URLEncoding.default
-        request = Alamofire.request("http://apivitrine.witharts.kz/api/\(url)", parameters:params.get(),encoding:URLEncoding.default).responseJSON { response in
-            print("selected products")
-            print("http://apivitrine.witharts.kz/api/\(url)")
-            print(params.get())
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters:params.get(), headers: headers).responseJSON { response in            
             switch(response.result) {
             case .success(let JSON):
                 let products = Product.fromJSONArray(JSON as AnyObject)
-                print("products")
-                print(products)
                 self.productsTableView.products.append(contentsOf: products)
                 if(products.count < self.pageSize) {
                     self.productsTableView.moreDataAvailable = false

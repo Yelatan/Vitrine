@@ -25,8 +25,7 @@ class NetworkDetailController: UIViewController {
     var network: Network?
     var initializedParallax = false
 
-    override func viewDidLoad() {
-        print("NetworkdetailController")
+    override func viewDidLoad() {        
         super.viewDidLoad()
         loadData()
     }
@@ -36,17 +35,14 @@ class NetworkDetailController: UIViewController {
         
         if !initializedParallax {
             initializedParallax = true
-            scrollView.addParallax(with: imagePagerView, andHeight: 200)
-            
+            scrollView.addParallax(with: imagePagerView, andHeight: 200)            
         }
     }
     
     private func loadData() {
-        
         if id == nil { return }
-        
         //        API.get("networks/\(id!)", params: nil) { response in
-       Alamofire.request("http://apivitrine.witharts.kz/api/networks/\(id!)").responseJSON { response in
+       Alamofire.request("http://manager.vitrine.kz:3000/api/networks/\(id!)").responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
                 self.network = Mapper<Network>().map(JSON as? AnyObject)
@@ -66,7 +62,7 @@ class NetworkDetailController: UIViewController {
         }
      
 //        API.get("networks/\(id!)/vitrines", params: nil) { response in switch(response.result) {
-        Alamofire.request("http://apivitrine.witharts.kz/api/networks/\(id!)/vitrines").responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/networks/\(id!)/vitrines").responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
             let vitrines = Vitrine.fromJSONArray(JSON as AnyObject)

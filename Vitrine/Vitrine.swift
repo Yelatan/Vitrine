@@ -24,6 +24,7 @@ class Vitrine: Mappable, MapObject {
     var networkName: String?
     var networkDescription: String?
     var distance = -1.0
+    var whatVitrine = ""
     
     required init?(_ map: Map) {
         
@@ -44,6 +45,7 @@ class Vitrine: Mappable, MapObject {
         
         networkId <- map["_networkId._id"]
         networkLogo <- map["_networkId.logo"]
+        networkLogo <- map["logo"]
         networkName <- map["_networkId.name"]
         networkDescription <- map["_networkId.description"]
     }
@@ -56,7 +58,6 @@ class Vitrine: Mappable, MapObject {
                 vitrines.append(v)
             }
         }
-        
         return vitrines
     }
     
@@ -69,14 +70,27 @@ class Vitrine: Mappable, MapObject {
                 if v != nil {
                     vitrines.append(v!)
                 }else{
-                
                 }
-                
             }
         }
-        
         return vitrines
     }
+    
+    static func fromJSONArrayDict(_ JSON: AnyObject, withLocation loc: [Double]) -> [Vitrine] {
+        var vitrines = [Vitrine]()
+        if JSON.count > 0 {
+            for item in JSON as! NSArray {
+                let v = Mapper<Vitrine>().map(item as AnyObject)
+                v?.distance = (v!.calcDistance(loc))
+                if v != nil {
+                    vitrines.append(v!)
+                }else{
+                }
+            }
+        }
+        return vitrines
+    }
+    
     
     func calcDistance(_ location: [Double]) -> Double {
         if !location.isEmpty {

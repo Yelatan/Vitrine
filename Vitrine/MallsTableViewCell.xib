@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,23 +21,23 @@
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="DBV-fO-PbQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="209"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHE-TY-oRf">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHE-TY-oRf" customClass="MallsTableViewCell" customModule="Vitrine" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="209" width="320" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 мин назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMf-2T-EJL">
-                                <rect key="frame" x="8" y="30" width="87" height="15"/>
+                                <rect key="frame" x="63" y="30" width="87" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEGA Park" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lA-3W-w8d">
-                                <rect key="frame" x="8" y="12" width="87" height="20"/>
+                                <rect key="frame" x="63" y="12" width="87" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfA-GP-8gl">
-                                <rect key="frame" x="100" y="19" width="212" height="21"/>
+                                <rect key="frame" x="155" y="19" width="157" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="cBE-kp-OKZ"/>
                                 </constraints>
@@ -46,19 +45,27 @@
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfn-6F-Yer" customClass="RoundLogoView" customModule="Vitrine" customModuleProvider="target">
+                                <rect key="frame" x="8" y="8" width="47" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Lfn-6F-Yer" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="8" id="2wn-l5-eCp"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="3lA-3W-w8d" secondAttribute="trailing" priority="750" constant="5" id="4ac-as-bUt"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="dMf-2T-EJL" secondAttribute="trailing" constant="5" id="AEZ-Ed-awy"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="dMf-2T-EJL" secondAttribute="trailing" constant="5" id="CZg-h8-fg4"/>
-                            <constraint firstItem="dMf-2T-EJL" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="8" id="Lmh-qc-xix"/>
+                            <constraint firstItem="dMf-2T-EJL" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="63" id="Lmh-qc-xix"/>
                             <constraint firstItem="3lA-3W-w8d" firstAttribute="centerY" secondItem="SHE-TY-oRf" secondAttribute="centerY" constant="-8" id="Nfe-as-M5U"/>
-                            <constraint firstItem="3lA-3W-w8d" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="8" id="PtP-7F-fHc"/>
+                            <constraint firstItem="3lA-3W-w8d" firstAttribute="leading" secondItem="SHE-TY-oRf" secondAttribute="leading" constant="63" id="PtP-7F-fHc"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="centerY" secondItem="SHE-TY-oRf" secondAttribute="centerY" id="WA7-Oy-Hcr"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="3lA-3W-w8d" secondAttribute="trailing" constant="5" id="XM6-gR-WXY"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="dMf-2T-EJL" secondAttribute="trailing" priority="750" constant="5" id="bMg-8r-whZ"/>
+                            <constraint firstItem="Lfn-6F-Yer" firstAttribute="top" secondItem="SHE-TY-oRf" secondAttribute="top" constant="8" id="dwe-cs-SpT"/>
+                            <constraint firstAttribute="bottom" secondItem="Lfn-6F-Yer" secondAttribute="bottom" constant="8" id="oyU-4b-Ud9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dfA-GP-8gl" secondAttribute="trailing" id="qoV-zb-89S"/>
+                            <constraint firstItem="3lA-3W-w8d" firstAttribute="leading" secondItem="Lfn-6F-Yer" secondAttribute="trailing" constant="8" id="rxR-RW-m4T"/>
                             <constraint firstItem="dMf-2T-EJL" firstAttribute="top" secondItem="3lA-3W-w8d" secondAttribute="bottom" constant="-2" id="xZE-PL-qav"/>
                             <constraint firstAttribute="height" constant="60" id="xj5-MM-uRX"/>
                             <constraint firstItem="dfA-GP-8gl" firstAttribute="leading" secondItem="3lA-3W-w8d" secondAttribute="trailing" constant="8" id="yF8-MN-HLD"/>
@@ -89,8 +96,10 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <accessibility key="accessibilityConfiguration" label="ZOZO"/>
             <connections>
                 <outlet property="detailLabel" destination="dMf-2T-EJL" id="p4f-L1-YV9"/>
+                <outlet property="mallLogo" destination="Lfn-6F-Yer" id="ep2-Nk-rzH"/>
                 <outlet property="picView" destination="DBV-fO-PbQ" id="b6l-ZO-ATe"/>
                 <outlet property="rangeLabel" destination="dfA-GP-8gl" id="ZDM-Rg-yn3"/>
                 <outlet property="titleLabel" destination="3lA-3W-w8d" id="K91-21-dhd"/>

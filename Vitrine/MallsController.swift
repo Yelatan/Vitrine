@@ -27,7 +27,7 @@ class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate
     var locManager = CLLocationManager()
     
     var page = 1
-    var pageSize = 5
+    var pageSize = 9999
     var searchString = ""
     
     var geoSort = false {
@@ -138,10 +138,10 @@ class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate
         
 //        request = API.get("malls", params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in
 //        request = Alamofire.request("http://apivitrine.witharts.kz/api/malls", parameters: params.get()).responseJSON { response in
-        request = Alamofire.request("http://apivitrine.witharts.kz/api/malls", parameters: params.params, headers: headers).responseJSON { response in
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/malls", parameters: params.params, headers: headers).responseJSON { response in            
             switch(response.result) {
             case .success(let JSON):
-                let malls = Mall.fromJSONArray(JSON as AnyObject, withLocation: location)
+                let malls = Mall.fromJSONArray(JSON as AnyObject, withLocation: location)                
                 self.mallsTableView.malls.append(contentsOf: malls)
                 if(malls.count < self.pageSize) {
                     self.mallsTableView.moreDataAvailable = false

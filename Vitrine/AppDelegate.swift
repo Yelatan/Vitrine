@@ -11,8 +11,8 @@ import Alamofire
 
 struct GlobalConstants {
     static var Person:User = User()
-    static let url:String = "http://apivitrine.witharts.kz"
-    static let baseURL:URL = URL(string: "http://apivitrine.witharts.kz/api")!
+    static let url:String = "http://manager.vitrine.kz:3000"
+    static let baseURL:URL = URL(string: "http://manager.vitrine.kz:3000/api")!
     
     static var category_id:String = "0"
     static var sub_category_id:String = "0"
@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func updateUserData() {
 //        API.get("users/profile") { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/profile").responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/profile").responseJSON { response in
         switch (response.result) {
         case .success(let JSON):
             GlobalConstants.Person.updatePersonalData(JSON as AnyObject)

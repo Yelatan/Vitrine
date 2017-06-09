@@ -74,10 +74,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         showModal("gmail")
     }
     
-    func showModal(_ provider: String) {
+    func showModal(_ provider: String) {        
         SVProgressHUD.show()
+        
         //API.get
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/state-token").responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/state-token").responseJSON { response in
+            print(response)
             if(response.response!.statusCode == 200) {
                 SVProgressHUD.dismiss()
                 
@@ -94,7 +96,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 if let resultMes = response.result.value as? NSDictionary{
                     if let message = resultMes["message"] {
                         SVProgressHUD.showError(withStatus: message as! String)
-                    } else {
+                    }else {
                         SVProgressHUD.dismiss()
                     }
                 }
@@ -104,7 +106,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     func didReceiveOAuthIOResponse(_ request: OAuthIORequest!) {
         let cred: NSDictionary = request.getCredentials()! as NSDictionary
-//        print(cred)
         login(withParams: ["code":cred["access_token"] as! String, "state":self.stateToken, "provider":cred["provider"] as! String])
         self.request_object = request
     }
@@ -163,7 +164,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     fileprivate func login(withParams params: [String: String]) {
         self.view.endEditing(true)
         SVProgressHUD.show()
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/login", method: .post, parameters: params as [String : AnyObject]).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/login", method: .post, parameters: params as [String : AnyObject]).responseJSON { response in
             let JSON = response.result.value as! Dictionary<String, AnyObject>
             if (response.response!.statusCode == 200) {
 

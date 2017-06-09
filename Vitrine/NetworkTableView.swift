@@ -28,9 +28,7 @@ import UIKit
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "NetworkTableViewCell") as! NetworkTableViewCell
 //        cell.network = networks[indexPath.row]
-//        return cell
-        
-        
+//        return cell        
         let cell1 = Bundle.main.loadNibNamed("NetworkTableViewCell", owner: self, options: nil)?.first as! NetworkTableViewCell
         cell1.network = networks[indexPath.row]
         return cell1
@@ -52,7 +50,6 @@ class NetworkTableViewCell: UITableViewCell {
     var network: Network! {
         didSet {
             titleLabel.text = network.name
-            //detailLabel.text = network.vitrines.count
             if network.photos.count > 0 {
                 bgImageView.sd_setImage(with: API.imageURL("networks/photos", string: network.photos[0]))
             }

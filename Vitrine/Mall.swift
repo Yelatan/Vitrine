@@ -38,12 +38,11 @@ class Mall: Mappable, MapObject {
     
     static func fromJSONArray(_ JSON: AnyObject) -> [Mall] {
         var malls = [Mall]()
-        if JSON.count > 0 {
+        if JSON.count >= 0 {
             for item in JSON as! NSArray {
                 malls.append(Mapper<Mall>().map(item as AnyObject)!)
             }
         }
-        
         return malls
     }
     
@@ -51,8 +50,7 @@ class Mall: Mappable, MapObject {
         var malls = [Mall]()
         if JSON.count > 0 {
             for item in JSON as! NSArray {
-                let m: Mall = Mapper<Mall>().map(item as AnyObject)!
-                print(loc)
+                let m = Mapper<Mall>().map(item as? AnyObject)!
                 m.distance = m.calcDistance(loc)
                 malls.append(m)
             }
@@ -61,15 +59,14 @@ class Mall: Mappable, MapObject {
     }
     
     func calcDistance(_ location: [Double]) -> Double {
-        //didn't fix
-//        if !location.isEmpty {
-//                let loc1 = CLLocation.init(latitude: location[1], longitude: location[0])
-//                let loc2 = CLLocation.init(latitude: self.coordinates[1], longitude: self.coordinates[0])
-//                return loc1.distance(from: loc2)/1000
-//            return 10
-//        }else {
-//            return -1.0
-//        }
-        return 10
+        //didn't fix because of locations is empty
+        if location.count > 0 && self.coordinates.count > 0{
+                let loc1 = CLLocation.init(latitude: location[1], longitude: location[0])
+                let loc2 = CLLocation.init(latitude: self.coordinates[1], longitude: self.coordinates[0])
+            print("\(loc1) |||| \(loc2)")
+                return loc1.distance(from: loc2)/1000
+        }else {
+            return -1.0
+        }
     }
 }

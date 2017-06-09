@@ -25,9 +25,6 @@ class NewsTableView: VTableViewWrapper {
         let cell1 = Bundle.main.loadNibNamed("NewsTableViewCell", owner: self, options: nil)?.first as! NewsTableViewCell
         cell1.news = news[indexPath.row]
         return cell1
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell") as! NewsTableViewCell
-//        cell.news = news[indexPath.row]
-//        return cell
         
     }
     
@@ -47,18 +44,20 @@ class NewsTableView: VTableViewWrapper {
             selectionStyle = UITableViewCellSelectionStyle.none
             titelLabel.text = news.name
             
-            //didn't fix the size is too large
-//            if news.networkLogo != nil {
-//                logoView.imageURL = API.imageURL("networks/logo", string: news.networkLogo!)
-//                logoView.imageURL = API.imageURL("networks/logo", string: "Nkzb_YKaM.png")
-//            }
-            
             if news.createdAt != nil {
-                detailLabel.text = "\((news.createdAt! as NSDate).timeIntervalSinceNow)"
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMMM dd yyyy"
+                let newDate = dateFormatter.string(from: (news.createdAt! as NSDate) as Date)
+                detailLabel.text = "\(newDate)"                
+//                detailLabel.text = "\((news.createdAt! as NSDate).timeIntervalSinceNow)"
             }
             
             if news.photos.count > 0 {
                 picView.sd_setImage(with: API.imageURL("news/photos", string: news.photos[0]))
+            }
+            
+            if news.networkLogo != nil {
+                logoView.imageURL = API.imageURL("networks/logo", string: news.networkLogo!)
             }
         }
     }

@@ -25,7 +25,6 @@ class MallMapController: UIViewController, UIScrollViewDelegate {
                     self.updateZoom()
                     self.activityIndicator.stopAnimating()
                     
-                    print(API.imageURL("floors/images", string: floor.images[0]))
                 }
                 
                 emptyMessage.isHidden = true
@@ -62,7 +61,8 @@ class MallMapController: UIViewController, UIScrollViewDelegate {
     
     func loadFloors() {
 //        API.get("malls/\(mall.id)/floors") {
-            Alamofire.request("http://apivitrine.witharts.kz/api/malls/\(mall.id)/floors").responseJSON(completionHandler: { (response) in
+            Alamofire.request("http://manager.vitrine.kz:3000/api/malls/\(mall.id)/floors").responseJSON(completionHandler: { (response) in
+                print(self.mall.id)
                 switch(response.result) {
                 case .success(let JSON):
                     self.floors = MallFloor.fromJSONArray(JSON as AnyObject)

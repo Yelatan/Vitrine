@@ -32,6 +32,7 @@ class MallInfoController: UIViewController {
             scrollView.addParallax(with: imagePagerView, andHeight: 200, andShadow: false)
             scrollView.contentOffset = CGPoint(x: 0, y: -200)
             for photo in mall.photos {
+                print("malls/photos \(photo)")
                 imagePagerView.addImageURL(API.imageURL("malls/photos", string: photo))
             }
         }

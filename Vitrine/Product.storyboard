@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JVJ-Uq-MUG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JVJ-Uq-MUG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -43,14 +43,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="Nb5-qc-LvB">
-                                                            <rect key="frame" x="0.0" y="0.0" width="722" height="450"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="450"/>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="Nb5-qc-LvB" secondAttribute="trailing" id="4Zr-Zk-nUg"/>
-                                                        <constraint firstItem="Nb5-qc-LvB" firstAttribute="top" secondItem="hP2-YU-eBK" secondAttribute="top" id="CTh-Ch-QEw"/>
-                                                        <constraint firstItem="Nb5-qc-LvB" firstAttribute="leading" secondItem="hP2-YU-eBK" secondAttribute="leading" id="L5R-Wj-73X"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Nb5-qc-LvB" secondAttribute="bottom" id="SnB-Dr-6qB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Nb5-qc-LvB" secondAttribute="trailing" id="BNJ-r8-OaM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Nb5-qc-LvB" secondAttribute="bottom" id="RSC-Ph-X1c"/>
+                                                        <constraint firstItem="Nb5-qc-LvB" firstAttribute="leading" secondItem="hP2-YU-eBK" secondAttribute="leading" id="b0L-H8-JhC"/>
+                                                        <constraint firstItem="Nb5-qc-LvB" firstAttribute="top" secondItem="hP2-YU-eBK" secondAttribute="top" id="cBx-Wz-dJP"/>
                                                     </constraints>
                                                 </scrollView>
                                             </subviews>
@@ -59,6 +59,7 @@
                                             <constraint firstAttribute="bottom" secondItem="hP2-YU-eBK" secondAttribute="bottom" id="Fct-MO-iaz"/>
                                             <constraint firstItem="hP2-YU-eBK" firstAttribute="leading" secondItem="BGX-2w-Xdg" secondAttribute="leading" id="Fo2-IR-bxn"/>
                                             <constraint firstAttribute="trailing" secondItem="hP2-YU-eBK" secondAttribute="trailing" id="LGY-c5-XNZ"/>
+                                            <constraint firstItem="Nb5-qc-LvB" firstAttribute="width" secondItem="BGX-2w-Xdg" secondAttribute="width" id="Ls9-jG-aNY"/>
                                             <constraint firstItem="hP2-YU-eBK" firstAttribute="top" secondItem="BGX-2w-Xdg" secondAttribute="top" id="hTl-Ta-DW9"/>
                                         </constraints>
                                         <connections>
@@ -560,9 +561,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-rT-sVO" userLabel="HeaderView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GV2-CE-Cgw" userLabel="Image Pager View" customClass="ImagePagerView" customModule="Vitrine" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMD-09-zD7" customClass="CLabsImageSlider" customModule="Vitrine">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Hw-XfW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -731,25 +732,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="v6V-Hw-XfW" firstAttribute="top" secondItem="GV2-CE-Cgw" secondAttribute="bottom" id="4Of-IV-0MY"/>
-                                    <constraint firstAttribute="trailing" secondItem="GV2-CE-Cgw" secondAttribute="trailing" id="8N4-cy-GVK"/>
-                                    <constraint firstItem="GV2-CE-Cgw" firstAttribute="top" secondItem="Kdq-rT-sVO" secondAttribute="top" id="MWh-NW-2fh"/>
+                                    <constraint firstItem="dMD-09-zD7" firstAttribute="top" secondItem="Kdq-rT-sVO" secondAttribute="top" id="7kA-WU-dbJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="dMD-09-zD7" secondAttribute="bottom" constant="40" id="HSR-Dl-Yfx"/>
+                                    <constraint firstItem="dMD-09-zD7" firstAttribute="leading" secondItem="Kdq-rT-sVO" secondAttribute="leading" id="KAo-XM-dNz"/>
                                     <constraint firstItem="v6V-Hw-XfW" firstAttribute="top" secondItem="Kdq-rT-sVO" secondAttribute="top" id="Uh0-3b-qEW"/>
                                     <constraint firstAttribute="trailing" secondItem="v6V-Hw-XfW" secondAttribute="trailing" id="YSD-kb-XJ0"/>
-                                    <constraint firstItem="GV2-CE-Cgw" firstAttribute="leading" secondItem="Kdq-rT-sVO" secondAttribute="leading" id="dlM-Dp-64P"/>
                                     <constraint firstAttribute="bottom" secondItem="dMB-g1-Ph9" secondAttribute="bottom" priority="750" id="eCe-p6-oYz"/>
                                     <constraint firstAttribute="trailing" secondItem="dMB-g1-Ph9" secondAttribute="trailing" id="eDy-h2-yc2"/>
+                                    <constraint firstAttribute="trailing" secondItem="dMD-09-zD7" secondAttribute="trailing" id="eai-xn-1km"/>
                                     <constraint firstAttribute="height" priority="750" constant="200" id="eyy-FO-1lH"/>
-                                    <constraint firstAttribute="bottom" secondItem="GV2-CE-Cgw" secondAttribute="bottom" constant="40" id="gjN-Hs-OBz"/>
-                                    <constraint firstAttribute="bottom" secondItem="GV2-CE-Cgw" secondAttribute="bottom" priority="750" constant="40" id="mIS-3c-S30"/>
                                     <constraint firstItem="dMB-g1-Ph9" firstAttribute="leading" secondItem="Kdq-rT-sVO" secondAttribute="leading" id="nkP-Lr-dwS"/>
                                     <constraint firstItem="v6V-Hw-XfW" firstAttribute="leading" secondItem="Kdq-rT-sVO" secondAttribute="leading" id="tAY-I3-dr8"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4Of-IV-0MY"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7J-eI-221">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="536"/>
@@ -878,7 +872,6 @@
                         <outlet property="favButton" destination="g6C-7V-FRf" id="6qI-US-e54"/>
                         <outlet property="gridButton" destination="cdh-5M-KJS" id="yEx-JN-UPT"/>
                         <outlet property="headerView" destination="Kdq-rT-sVO" id="ARe-yp-1Sn"/>
-                        <outlet property="imagePagerView" destination="GV2-CE-Cgw" id="pcI-fc-8sd"/>
                         <outlet property="infoView" destination="e7J-eI-221" id="ADI-xl-BQn"/>
                         <outlet property="likeButton" destination="r9x-gE-Rvb" id="eRF-de-otf"/>
                         <outlet property="listButton" destination="Cso-qr-YSn" id="ED9-Y3-0Yx"/>
@@ -889,6 +882,7 @@
                         <outlet property="pickAddressButton" destination="v6V-Hw-XfW" id="aKz-jx-xqt"/>
                         <outlet property="productsCollectionView" destination="cMq-5C-Krb" id="9SX-Pd-vhh"/>
                         <outlet property="sortButton" destination="w4H-Cl-Rwc" id="iOC-tK-pDe"/>
+                        <outlet property="swipeImages" destination="dMD-09-zD7" id="uBc-o2-Sbt"/>
                         <outlet property="toolbar" destination="ovm-k6-pKk" id="HQm-6i-G6D"/>
                         <segue destination="TNZ-YN-bI5" kind="show" identifier="ProductDetail" id="u1J-jX-cwO"/>
                     </connections>
@@ -945,7 +939,7 @@
                                 <segue destination="ou2-9d-2bM" kind="show" identifier="SearchSettings" id="H4e-e6-Z3G"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6C-7V-FRf">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6C-7V-FRf">
                             <rect key="frame" x="237" y="0.0" width="75" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="Xye-Zh-9wE"/>

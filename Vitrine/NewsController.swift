@@ -111,8 +111,9 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         
         let params = VitrineParams()
         
-        headers["page"] = "\(page)"
-        headers["page-size"] = "\(pageSize)"
+//        headers["page"] = "\(page)"
+//        headers["page-size"] = "\(pageSize)"
+        headers["Authorization"] = nil
         
         params.main("expand", value: "_networkId:name logo,_vitrines:address")
 //        params.find("disabled", value: "false")
@@ -120,6 +121,7 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         
         if (favFilter) {
             url = "users/favorite-networks/news"
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
         } else {
             url = "news"
         }
@@ -141,16 +143,16 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         
 //        request = API.get("\(url)", params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in
 //         request = Alamofire.request("http://apivitrine.witharts.kz/api/users/login", method: .get, parameters: params as [String : AnyObject], headers: headers).
-       //Bako
-        Alamofire.request("http://apivitrine.witharts.kz/api/\(url)", parameters: params.get(),headers: headers).responseJSON { response in
+       //Bakohttp://manager.vitrine.kz:3000/api
+        Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get(),headers: headers).responseJSON { response in
+            print("http://manager.vitrine.kz:3000/api/\(url)")
             switch(response.result) {
             case .success(let JSON):
                 let news = News.fromJSONArray(JSON as AnyObject)
                 self.newsTableView.news.append(contentsOf: news)
-                
                 if(news.count < self.pageSize) {
                     self.newsTableView.moreDataAvailable = false
-                } else {
+                }else {
                     self.page += 1
                 }
             

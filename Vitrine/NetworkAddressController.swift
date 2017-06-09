@@ -18,15 +18,20 @@ class NetworkAddressController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var headers = [String: String]()
+        if (GlobalConstants.Person.hasToken()) {
+            headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         let params = VitrineParams()
         params.main("expand", value: "_networkId:logo name description")
         let  params2 = params.get()
         if networkId != nil {
 //            API.get("networks/\(networkId)/vitrines", params: params) { response in
-            Alamofire.request("http://apivitrine.witharts.kz/api/users/login", parameters:params2,encoding:URLEncoding.default).responseJSON { response in
+            Alamofire.request("http://manager.vitrine.kz:3000/api/networks/\(self.networkId!)", parameters:params.get(), headers: headers).responseJSON { response in                                
                 switch(response.result) {
                 case .success(let JSON):
-//                    print(JSON)
+                    print("json")
                     self.vitrines = Vitrine.fromJSONArray(JSON as AnyObject)
                     self.tableView.reloadData()
                 case .failure(let error):

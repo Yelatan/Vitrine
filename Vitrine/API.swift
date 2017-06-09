@@ -12,8 +12,10 @@ import Alamofire
 class API {
     
     static func imageURL(_ prefix: String, string: String) -> URL {
-        print("\(GlobalConstants.baseURL)/uploads/\(prefix)/2x/\(string)")
-        return URL(string: "\(GlobalConstants.baseURL)/uploads/\(prefix)/2x/\(string)")!
+        print(URL(string: "\(GlobalConstants.baseURL)/uploads/\(prefix)/1x/\(string)")!)
+        return URL(string: "\(GlobalConstants.baseURL)/uploads/\(prefix)/1x/\(string)")!
+        //http://manager.vitrine.kz:3000/api/uploads/vitrines/photos/1x/EkkY2mSJ7.jpg
+//        return URL(string: "http://manager.vitrine.kz:3000/api/uploads/vitrines/photos/1x/EkkY2mSJ7.jpg")!
     }
     
     static func jsonFromDict(_ d: [String: AnyObject]) -> String! {

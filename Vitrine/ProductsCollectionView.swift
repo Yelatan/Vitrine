@@ -106,7 +106,10 @@ protocol vCollectionViewDelegate {
         progressView.startAnimating()
         
         collectionView.addInfiniteScroll { (scrollView) in
-            self.delegate?.vCollectionViewDidRequestMoreData()
+//            self.delegate?.vCollectionViewDidRequestMoreData()
+            //removed infiniteScroll
+            self.collectionView.finishInfiniteScroll()
+            
         }
     }
     
@@ -121,7 +124,7 @@ protocol vCollectionViewDelegate {
         addConstraint(stickyHeaderTop!)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        
         return products.count
         
     }

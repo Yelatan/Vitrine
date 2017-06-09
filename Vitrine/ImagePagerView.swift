@@ -14,6 +14,7 @@ import UIKit
     let nibName = "ImagePagerView"
     var view: UIView!
     
+    @IBOutlet weak var swipeImage: CLabsImageSlider!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -70,8 +71,8 @@ import UIKit
         
         iv.autoresizingMask = [.flexibleHeight, .flexibleWidth, .flexibleLeftMargin]
         pageControl.numberOfPages = imageCount
-        
         imageViews.append(iv)
+        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

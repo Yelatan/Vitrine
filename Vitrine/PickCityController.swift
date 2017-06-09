@@ -23,7 +23,7 @@ class PickCityController: UITableViewController {
     }
     
     func loadCities() {
-        Alamofire.request("http://apivitrine.witharts.kz/api/cities").responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/cities").responseJSON { response in
 //        API.get("cities") { response in
             switch(response.result) {
             case .success(let JSON):

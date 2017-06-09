@@ -32,16 +32,22 @@ import UIKit
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if displayMode == .default {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "VitrinesTableViewCell") as! VitrinesTableViewCell
-            cell.vitrine = vitrines[indexPath.row]
-            return cell
+        if displayMode == .default {            
+            let cell1 = Bundle.main.loadNibNamed("VitrinesTableViewCell", owner: self, options: nil)?.first as! VitrinesTableViewCell
+            cell1.vitrine = vitrines[indexPath.row]
+            print("default")
+            return cell1
+            
         }
-        
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "VitrinesTableViewAltCell") as! VitrinesTableViewAltCell
-            cell.vitrine = vitrines[indexPath.row]
-            return cell
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "VitrinesTableViewAltCell") as! VitrinesTableViewAltCell
+//            cell.vitrine = vitrines[indexPath.row]
+//            return cell
+            
+            let cell1 = Bundle.main.loadNibNamed("VitrinesTableViewAltCell", owner: self, options: nil)?.first as! VitrinesTableViewAltCell
+            cell1.vitrine = vitrines[indexPath.row]
+            print("alt")
+            return cell1
         }
     }
     
@@ -59,12 +65,15 @@ class VitrinesTableViewCell: UITableViewCell {
     @IBOutlet weak var rangeLabel: UILabel!
     
     var vitrine: Vitrine! {
-        didSet {
+        didSet {            
             titleLabel.text = vitrine.name
             detailLabel.text = vitrine.address
             if vitrine.photos.count > 0 {
+//                bgImageView.sd_setImage(with: API.imageURL("networks/photos", string: vitrine.photos[0]))
                 bgImageView.sd_setImage(with: API.imageURL("vitrines/photos", string: vitrine.photos[0]))
             }
+            print("vitrine cell")
+            print(vitrine.networkLogo)
             if vitrine.networkLogo != nil {
                 logoView.imageURL = API.imageURL("networks/logo", string: vitrine.networkLogo!)
             }
@@ -85,7 +94,7 @@ class VitrinesTableViewAltCell: UITableViewCell {
     @IBOutlet weak var rangeLabel: UILabel!
     
     var vitrine: Vitrine! {
-        didSet {
+        didSet {            
             titleLabel.text = vitrine.name
             detailLabel.text = vitrine.address
             if vitrine.photos.count > 0 {

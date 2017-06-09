@@ -191,8 +191,7 @@ class ProductDetailController: UIViewController, UICollectionViewDataSource, UIS
     
     fileprivate func loadSuggestions() {
 //        API.get("products/\(product!.id)/similar", params: nil, encoding: <#URLEncoding.Destination#>) {
-            Alamofire.request("http://apivitrine.witharts.kz/api/products/\((self.product!.id)!)/similar").responseJSON { response in
-            print(("http://apivitrine.witharts.kz/api/products/\((self.product!.id)!)/similar"))
+            Alamofire.request("http://manager.vitrine.kz:3000/api/products/\((self.product!.id)!)/similar").responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
                 let suggestions = Product.fromJSONArray(JSON as AnyObject)
@@ -278,7 +277,7 @@ class ImagePagerCell: UICollectionViewCell, UIScrollViewDelegate {
             imageView.sd_setImage(with: imageURL) { (image, error, imageCacheType, url) in
                 //didn't fix, because of the image is does not exist                 
 //                let zoomScale = max(self.bounds.size.width / (image?.size.width)!, self.bounds.size.height / (image?.size.height)!)
-                let zoomScale: CGFloat = 100
+                let zoomScale: CGFloat = 200
                 if (zoomScale > 1) {
                     self.scrollView.minimumZoomScale = 1
                 }

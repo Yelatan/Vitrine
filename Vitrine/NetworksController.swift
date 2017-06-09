@@ -31,8 +31,8 @@ class NetworksController: UIViewController, FilterDelegate, VTableViewDelegate, 
     var request: Alamofire.Request?
     var favourite_shop: String = "0"
     var categoryId = ""
-    var page = 1
-    var pageSize = 5
+    var page = 0
+    var pageSize = 9999
     var searchString = ""
     var favorite = false
     var locManager = CLLocationManager()
@@ -56,6 +56,7 @@ class NetworksController: UIViewController, FilterDelegate, VTableViewDelegate, 
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
             if locManager.location != nil || geoSort {
+                print(locManager.location!)
                 geoSort = !geoSort
                 if vitrinesTableView.delegate == nil {
                     networkTableView.reset()
@@ -148,60 +149,55 @@ class NetworksController: UIViewController, FilterDelegate, VTableViewDelegate, 
         var headers = [String: String]()
         var url: String!
         
-        headers["page"] = "\(page)"
-        headers["page-size"] = "\(pageSize)"
+//        headers["page"] = "\(page)"
+//        headers["page-size"] = "\(pageSize)"
+        headers["Authorization"] = nil
         
 //        params.find("disabled", value: "false")
         params.find["disabled"] = "false" as AnyObject
+        
+        if let r = request {
+            r.cancel()
+        }
         
         if geoSort {
             location = [locManager.location!.coordinate.longitude, locManager.location!.coordinate.latitude]
             
             url = "vitrines"
-//            params.find("coordinates", value: ["$near": location])
             params.find["coordinates"] = ["$near": location] as AnyObject
-//            params.find("_cityId", value: GlobalConstants.Person.CityID)
             params.find["_cityId"] = GlobalConstants.Person.CityID as AnyObject
-//            params.main("expand", value: "_networkId:logo")
             params.find["expand"] = "_networkId:logo" as AnyObject
             if (!categoryId.isEmpty) {
-//                params.find("_categoryId", value: categoryId)
                 params.find["_categoryId"] = categoryId as AnyObject
             }
             if (favorite) {
                 url = "users/favorite-vitrines"
+                headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
             }
         } else {
             params.main("expand", value: "_vitrines:address coordinates name")
             url = "networks"
             if (favorite) {
                 url = "users/favorite-networks"
+                headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
             }
             if (!categoryId.isEmpty) {
-//                params.find("_categories", value: categoryId)
                 params.find["_categories"] = categoryId as AnyObject
             }
         }
         
         if (!searchString.isEmpty) {
-//            params.find("search", value: searchString)
             params.find["search"] = searchString as AnyObject
         }
         
-        if let r = request {
-            r.cancel()
-        }
-        //        request = API.get(url, params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in
-        request =  Alamofire.request("http://apivitrine.witharts.kz/api/\(url!)", parameters:params.get(),encoding:URLEncoding.default).responseJSON { response in
-            print(params.get())
-            print("http://apivitrine.witharts.kz/api/\(url!)")
+        
+        request =  Alamofire.request("http://manager.vitrine.kz:3000/api/\(url!)", parameters:params.get(), headers: headers).responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
-                print("success")
                 var tView = VTableViewWrapper()
                 if self.geoSort {
                     tView = self.vitrinesTableView
-                    let data = Vitrine.fromJSONArray(JSON as AnyObject, withLocation: location)
+                    let data = Vitrine.fromJSONArray(JSON as AnyObject, withLocation: location)                    
                     self.vitrinesTableView.vitrines.append(contentsOf: data)
                     
                     if(data.count < self.pageSize) {
@@ -223,8 +219,7 @@ class NetworksController: UIViewController, FilterDelegate, VTableViewDelegate, 
                 if (JSON as AnyObject).count == 0 && self.page == 1 {
                     tView.showEmptyMessage("Ничего не найдено")
                 }
-            case .failure(let error):
-                print("fail")
+            case .failure(let error):                
                 print(error)
             }
         }

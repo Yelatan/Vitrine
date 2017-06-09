@@ -39,10 +39,10 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     var oauth_modal: OAuthIOModal? = nil
     var request_object: OAuthIORequest? = nil
     var stateToken: String = ""
+    var userdef = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -73,7 +73,7 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         update()
         
 //        API.get("cities", encoding: <#URLEncoding.Destination#>) { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/cities").responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/cities").responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
                 let cities = City.fromJSONArray(JSON as AnyObject)
@@ -91,7 +91,8 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     }
 
     func update() {
-    
+        let socAccounts = userdef.object(forKey: "soc_accounts") as? NSDictionary
+        print(socAccounts)
         if(GlobalConstants.Person.hasName()) {
             name.text = GlobalConstants.Person.Name
             surname.text = GlobalConstants.Person.Surname
@@ -126,15 +127,35 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
             address.text = GlobalConstants.Person.Address
         }
         
-        if GlobalConstants.Person.inSocial(User.ACC_FB) {
+        
+//        if GlobalConstants.Person.inSocial(User.ACC_FB) {
+//            social_facebook.text = "Подключен"
+//            self.social_facebook_icon.image = UIImage(named: "facebook_on")
+//        }
+        if socAccounts?[User.ACC_FB] != nil {
             social_facebook.text = "Подключен"
+            self.social_facebook_icon.image = UIImage(named: "facebook_on")
         }
-        if GlobalConstants.Person.inSocial(User.ACC_VK) {
+//        if GlobalConstants.Person.inSocial(User.ACC_VK) {
+//            social_vk.text = "Подключен"
+//            self.social_vk_icon.image = UIImage(named: "vk_on")
+//        }
+        print(socAccounts?[User.ACC_VK])
+        if socAccounts?[User.ACC_VK] != nil {
             social_vk.text = "Подключен"
+            self.social_vk_icon.image = UIImage(named: "vk_on")
         }
-        if GlobalConstants.Person.inSocial(User.ACC_GP) {
+        
+//        if GlobalConstants.Person.inSocial(User.ACC_GP) {
+//            social_gmail.text = "Подключен"
+//            self.social_gmail_icon.image = UIImage(named: "gmail_on")
+//        }
+        if socAccounts?[User.ACC_GP] != nil {
             social_gmail.text = "Подключен"
+            self.social_gmail_icon.image = UIImage(named: "gmail_on")
         }
+        
+        
     }
     
     var imagePickMenu: UIAlertController!
@@ -193,7 +214,11 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) { //Когда выбрана картинка
-        
+        var headers = [String: String]()
+        if (GlobalConstants.Person.hasToken()) {
+            headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         
         let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage //Берем фото
         dismiss(animated: true, completion: nil)
@@ -205,8 +230,7 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         SVProgressHUD.show()
         
         //        API.put("users/avatar", params: ["encoded": imageString as AnyObject]) { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/avatar", method: .put, parameters: ["encoded": imageString as AnyObject]).responseJSON { response in
-            print(response)
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/avatar", method: .put, parameters: ["encoded": imageString as AnyObject], headers: headers).responseJSON { response in
             switch response.result {
             case .success(let JSON as NSDictionary):
                 if(response.response?.statusCode != 200) {
@@ -226,7 +250,8 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     
     @IBAction func logout(_ sender: AnyObject) {
 //        API.post("users/logout", encoding: <#URLEncoding.Destination#>) { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/logout", method: .post).responseJSON { response in
+        self.userdef.removeObject(forKey: "soc_accounts")
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/logout", method: .post).responseJSON { response in
             GlobalConstants.Person.logout()
             super.performSegue(withIdentifier: "logout", sender: nil)
         }
@@ -271,14 +296,18 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
 
     
     @IBAction func saveProfile(_ sender: AnyObject) {
-        
         SVProgressHUD.show()
+        var headers = [String: String]()
+        if (GlobalConstants.Person.hasToken()) {
+            headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         
         var parameters = [String: String]()
         
-//        if !city.text!.isEmpty && city.text != GlobalConstants.Person.CityName {
-//            parameters["_cityId"] = city.selectedItem.value
-//        }
+        if !city.text!.isEmpty && city.text != GlobalConstants.Person.CityName {
+            parameters["_cityId"] = city.selectedItem.value
+        }
 
         if !name.text!.isEmpty && name.text != GlobalConstants.Person.Name {
             parameters["firstName"] = name.text
@@ -299,6 +328,9 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         if !gender.text!.isEmpty && gender.text != GlobalConstants.Person.Gender {
             parameters["gender"] = gender.selectedItem.value
         }
+        if !email.text!.isEmpty{
+            parameters["email"] = email.text
+        }
         
         if !birthday.text!.isEmpty && birthday.text != GlobalConstants.Person.getBirthdayString() {
             let df1: DateFormatter = DateFormatter()
@@ -312,7 +344,7 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         }
         
 //        API.put("users/profile", params: parameters as [String : AnyObject], encoding: <#URLEncoding.Destination#>) { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/profile", method: .put, parameters: parameters as [String : AnyObject]).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/profile", method: .put, parameters: parameters as [String : AnyObject], headers: headers).responseJSON { response in            
             switch (response.result) {
             case .success(let JSON):
                 GlobalConstants.Person.updatePersonalData(JSON as AnyObject)
@@ -324,6 +356,11 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func changePassword(_ sender: AnyObject) {
+        var headers = [String: String]()
+        if (GlobalConstants.Person.hasToken()) {
+            headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         SVProgressHUD.show()
         
         if ((oldPassword.text!.isEmpty || password.text!.isEmpty || rePassword.text!.isEmpty) ) {
@@ -337,7 +374,7 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         parameters["newPasswordConfirm"] = rePassword.text
         
 //        API.put("users/password", params: parameters as [String : AnyObject], encoding: <#URLEncoding.Destination#>) { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/password", parameters: parameters as [String : AnyObject]).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/password", method: .put, parameters: parameters as [String : AnyObject], headers: headers).responseJSON { response in
         switch (response.result) {
             case .success(let JSON as NSDictionary):
                 GlobalConstants.Person.updatePersonalData(JSON as AnyObject)
@@ -366,6 +403,19 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         showModal("gmail")
     }
     
+    @IBAction func sendMsg(_ sender: Any) {
+        let googleUrlString = "mailto:blah@blah.com?&subject=Hello&body=Hi"
+        if let googleUrl = NSURL(string: googleUrlString) {
+            // show alert to choose app
+            if UIApplication.shared.canOpenURL(googleUrl as URL) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(googleUrl as URL, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(googleUrl as URL)
+                }
+            }
+        }
+    }
     func showModal(_ provider: String) {
         self.oauth_modal?.show(withProvider: provider)
     }
@@ -373,31 +423,48 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     func didReceiveOAuthIOResponse(_ request: OAuthIORequest!) {
         var params = [String:String]()
         var identity = ""
+        var headers = [String: String]()
+        if (GlobalConstants.Person.token != nil){
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         
         request.me([]) { (data, a, b) in
             switch request.data.provider {
             case "vk":
-                print("didn't fix")
-//                identity = data?["raw"]!["id"] as! String
+                print("didn't fix vk")
+                let dict = data?["raw"] as! [String:AnyObject]
+                print(dict)
+                let dict2 = dict["uid"]
+                identity = "id"
             default:
                 print("didn't fix")
 //                identity = data?["raw"]!["email"] as! String
             }
             
             params["identity"] = identity
+//            params["identity"] = "sd"
             params["provider"] = request.data.provider
             
 //            API.post("users/account", params: params as [String : AnyObject], encoding: <#URLEncoding.Destination#>) { response in
-            Alamofire.request("http://apivitrine.witharts.kz/api/users/account", parameters: params as [String : AnyObject]).responseJSON { response in
+            Alamofire.request("http://manager.vitrine.kz:3000/api/users/account", method: .post, parameters: params as [String : AnyObject], headers: headers).responseJSON { response in                
             switch(response.result) {
                 case .success(let JSON):
                     switch request.data.provider {
                     case "vk":
                         self.social_vk.text = "Подключен"
+                        self.social_vk_icon.image = UIImage(named: "vk_on")
+                        GlobalConstants.Person.accounts["ACC_VK"] = "ok"
+                        self.userdef.set(GlobalConstants.Person.accounts, forKey: "soc_accounts")
                     case "facebook":
                         self.social_facebook.text = "Подключен"
+                        self.social_facebook_icon.image = UIImage(named: "facebook_on")
+                        GlobalConstants.Person.accounts["ACC_FB"] = "ok"
+                        self.userdef.set(GlobalConstants.Person.accounts, forKey: "soc_accounts")
                     case "gmail":
                         self.social_gmail.text = "Подключен"
+                        self.social_facebook_icon.image = UIImage(named: "gmail_on")
+                        GlobalConstants.Person.accounts["ACC_GP"] = "ok"
+                        self.userdef.set(GlobalConstants.Person.accounts, forKey: "soc_accounts")
                     default:
                         print("ERROR")
                     }

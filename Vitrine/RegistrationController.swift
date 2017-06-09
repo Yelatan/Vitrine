@@ -117,10 +117,8 @@ class RegistrationController: UIViewController, UITextFieldDelegate {
             let parameters = ["email":emailField.text!, "password":passwordField.text!]
             
 //            API.post("users/register", params: parameters as [String : AnyObject]) { response in
-                Alamofire.request("http://apivitrine.witharts.kz/api/users/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-                print("http://apivitrine.witharts.kz/api/users/register \(parameters as [String : AnyObject])")
+                Alamofire.request("http://manager.vitrine.kz:3000/api/users/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in                
                 if let JSON = response.result.value {
-                    print("response JSON")
                     let responseJson = JSON as! Dictionary<String, AnyObject>
                     
                     let token = responseJson["token"] as? String

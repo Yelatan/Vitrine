@@ -37,7 +37,6 @@ class News: Mappable {
         disabled <- map["disabled"]
         photos <- map["photos"]
         createdAt <- (map["createdAt"], ISODateTransform())
-        
         networkId <- map["_networkId._id"]
         networkName <- map["_networkId.name"]
         networkLogo <- map["_networkId.logo"]

@@ -32,6 +32,8 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
 
     @IBAction func favorite(_ sender: AnyObject) {
         GlobalConstants.Person.authenticated(fromController: self) {
+            print("favorite clicked function")
+            //didn't fix couldn't find request class
             self.filterDelegate?.onFavorite()
             self.favorite.isSelected = !self.favorite.isSelected
         }
@@ -59,7 +61,6 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
     
     
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FilterCategoryCell
         let category = categories[indexPath.row]
         cell.textLabel.text = category.name
@@ -68,8 +69,7 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
             cell.imageView.image = UIImage(named: "icon_sort_back")
         } else if category.logo != nil {
             cell.imageView.sd_setImage(with: API.imageURL("categories/logo", string: category.logo!))
-        }
-        
+        }        
         return cell
     }
     
@@ -100,6 +100,11 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
     internal func loadData(_ id: String = "") {
         let params = VitrineParams()
         var url = "categories"
+        var headers = [String: String]()
+        if (GlobalConstants.Person.token != nil){
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
+        
         
         if (!id.isEmpty) {
             url += "/\(id)"
@@ -128,7 +133,7 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
         //Bako
         //API.get(url, params: params, encoding: URLEncoding.Destination) { response in
         
-        Alamofire.request(url, parameters: params.get()).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get(), headers: headers).responseJSON { response in            
             switch response.result {
             case .success(let JSON):
                 if (id.isEmpty) {

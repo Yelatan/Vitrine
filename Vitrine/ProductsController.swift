@@ -16,6 +16,8 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
     @IBOutlet var likeButton: UIBarButtonItem!
     
     // Header
+    
+    @IBOutlet weak var swipeImages: CLabsImageSlider!
     @IBOutlet var headerView: UIView!
     @IBOutlet var logoView: RoundLogoView!
     @IBOutlet var imagePagerView: ImagePagerView!
@@ -77,6 +79,8 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
     
     @IBAction func addLikeACtion(_ sender: AnyObject) {
         GlobalConstants.Person.authenticated(fromController: self) {
+            
+            
             let url = "users/favorite-network"
             let type = User.FAV_NETWORKS
             var id: String!
@@ -89,9 +93,12 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
             
             let params = ["_id": id]
             
+            var headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+            
             if (GlobalConstants.Person.getFavs(type).contains(id)) {
 //                API.delete("\(url)/\(id)", encoding: <#URLEncoding.Destination#>) { response in
-                Alamofire.request("http://apivitrine.witharts.kz/api/\(url)/\(id)", method: .post, parameters: params as [String : AnyObject]).responseJSON { response in
+                Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)/\(id!)", method: .delete, parameters: params as [String : AnyObject], headers: headers).responseJSON { response in                    
                 switch(response.result) {
                 case .success(_):
                     GlobalConstants.Person.delFav(id, forKey: type)
@@ -102,7 +109,7 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
                 }
             } else {
 //                API.post(url, params: params as [String : AnyObject], encoding: <#URLEncoding.Destination#>) { response in switch(response.result) {
-                Alamofire.request("http://apivitrine.witharts.kz/api/\(url)", method: .post, parameters: params as [String : AnyObject]).responseJSON { response in
+                Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", method: .post, parameters: params as [String : AnyObject], headers: headers).responseJSON { response in
                 switch(response.result) {
                 case .success(_):
                     GlobalConstants.Person.setFav(id, forKey: type)
@@ -139,6 +146,7 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
     }
     
     @IBAction func pickAddress(_ segue: UIStoryboardSegue) {
+        print("address picked")
         let controller = segue.source as! NetworkAddressController
         vitrine = controller.selectedVitrine
         initialize()
@@ -167,13 +175,19 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
                 logoView.imageURL = API.imageURL("networks/logo", string: network!.logo!)
             }
             else {
-                logoView.imageURL = API.imageURL("networks/logo", string: vitrine!.networkLogo!)
+//                logoView.imageURL = API.imageURL("networks/logo", string: vitrine!.networkLogo!)
             }
-            if vitrine!.photos.count > 0 && imagePagerView.imageCount == 0 {
-                for photo in vitrine!.photos {
-                    imagePagerView.addImageURL(API.imageURL("vitrines/photos", string: photo))
-                }
-            }
+//            if vitrine!.photos.count > 0 && imagePagerView.imageCount == 0 {
+//                for photo in vitrine!.photos {
+//                    imagePagerView.addImageURL(API.imageURL("vitrines/photos", string: photo))
+//                }
+//            }
+            
+            var vitrinePhotoUrls = [String]()
+            for photo in vitrine!.photos {
+                vitrinePhotoUrls.append(String(describing: API.imageURL("vitrines/photos", string: photo)))
+            }            
+            swipeImages.setUpView(imageSource: .Url(imageArray:vitrinePhotoUrls,placeHolderImage:UIImage(named:"ryba_vitrine_logo")),slideType:.ManualSwipe,isArrowBtnEnabled: true)
             pickAddressButton.setTitle(vitrine?.address, for: UIControlState())
             productsCollectionView.delegate = self
         }
@@ -181,11 +195,20 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
             title = network!.name
             networkId = network!.id
             logoView.imageURL = API.imageURL("networks/logo", string: network!.logo!)
-            if network!.photos.count > 0 && imagePagerView.imageCount == 0 {
-                for photo in network!.photos {
-                    imagePagerView.addImageURL(API.imageURL("networks/photos", string: photo))
-                }
+//            if network!.photos.count > 0 && imagePagerView.imageCount == 0 {
+//                for photo in network!.photos {
+//                    imagePagerView.addImageURL(API.imageURL("networks/photos", string: photo))
+//                }
+//            }
+            
+            
+            var vitrinePhotoUrls = [String]()
+            for photo in network!.photos {
+                vitrinePhotoUrls.append(String(describing: API.imageURL("networks/photos", string: photo)))
             }
+            swipeImages.setUpView(imageSource: .Url(imageArray:vitrinePhotoUrls,placeHolderImage:UIImage(named:"ryba_vitrine_logo")),slideType:.ManualSwipe,isArrowBtnEnabled: true)
+            
+            
             productsCollectionView.delegate = self
         }
         else if vitrineId != nil {
@@ -193,7 +216,8 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
             params.main("expand", value: "_networkId:logo name description")
             
 //            API.get("vitrines/\(vitrineId!)", params: params, encoding: <#URLEncoding.Destination#>) {
-            Alamofire.request("http://apivitrine.witharts.kz/api/vitrines/\(vitrineId!)", parameters: params.get()).responseJSON { response in
+            Alamofire.request("http://manager.vitrine.kz:3000/api/vitrines/\(vitrineId!)", parameters: params.get()).responseJSON { response in
+                
                switch(response.result) {
                 case .success(let JSON):
                     self.vitrine = Mapper<Vitrine>().map(JSON as AnyObject)
@@ -205,9 +229,10 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
         }
         else if networkId != nil {
 //            API.get("networks/\(networkId!)", encoding: <#URLEncoding.Destination#>) {response in
-            Alamofire.request("http://apivitrine.witharts.kz/api/networks/\(networkId!)").responseJSON { response in
+            Alamofire.request("http://manager.vitrine.kz:3000/api/networks/\(networkId!)").responseJSON { response in                
             switch(response.result) {
-                case .success(let JSON):                    
+                case .success(let JSON):
+                    
                     self.network = Mapper<Network>().map(JSON as AnyObject)
                     self.initialize()
                 case .failure(let error):
@@ -270,7 +295,10 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
         let params = VitrineParams()
         
         headers["page"] = "\(page)"
-        headers["page-size"] = "\(pageSize)"
+        headers["page-size"] = "\(pageSize)"        
+        if (GlobalConstants.Person.token != nil){
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
         
         params.searchParams(searchParams)
         params.main("expand", value: "_networkId:name,_brandId:name,_vitrines:coordinates name")
@@ -297,10 +325,8 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
             r.cancel()
         }
 //        request = API.get(url, params: params, encoding: <#URLEncoding.Destination#>) {response in
-        request = Alamofire.request("http://apivitrine.witharts.kz/api/\(url!)", parameters: params.get()).responseJSON {
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url!)", parameters: params.find).responseJSON {
             response in
-            print("parameters product request")
-            print(params.get())
                 switch(response.result) {
                 case .success(let JSON):
                     let products = Product.fromJSONArray(JSON as AnyObject)

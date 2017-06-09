@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vitrine/ProfileController.swift"
-            timestampString = "514734957.776503"
+            timestampString = "518692404.143869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "didReceiveOAuthIOResponse(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vitrine/ProfileController.swift"
-            timestampString = "514734957.776503"
+            timestampString = "518692404.143869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
             landmarkName = "didReceiveOAuthIOResponse(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -38,27 +38,27 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vitrine/ProfileController.swift"
-            timestampString = "515394204.699948"
+            timestampString = "518101780.891709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Vitrine.ProfileController.imagePickerController (__ObjC.UIImagePickerController, didFinishPickingMediaWithInfo : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
                   moduleName = "Vitrine"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bakbergen/Google%20%D0%94%D0%B8%D1%81%D0%BA/MainDesktop/AVSoftware/Projects/Vitrine/Vitrine/ProfileController.swift"
-                  timestampString = "515394204.915647"
+                  timestampString = "516198724.513553"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "208"
@@ -66,14 +66,14 @@
                   offsetFromSymbolStart = "1854">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Vitrine.ProfileController.(imagePickerController (__ObjC.UIImagePickerController, didFinishPickingMediaWithInfo : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()).(closure #1)"
                   moduleName = "Vitrine"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bakbergen/Google%20%D0%94%D0%B8%D1%81%D0%BA/MainDesktop/AVSoftware/Projects/Vitrine/Vitrine/ProfileController.swift"
-                  timestampString = "515394204.917758"
+                  timestampString = "516198724.515191"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "209"
@@ -81,6 +81,22 @@
                   offsetFromSymbolStart = "23">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vitrine/MallsController.swift"
+            timestampString = "517398109.741431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "refreshList()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

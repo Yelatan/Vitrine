@@ -18,13 +18,18 @@ class FavoriteProductButton: UIButton {
     }
     
     func didPress() {
+        var headers = [String: String]()
+        if (GlobalConstants.Person.hasToken()) {
+            headers = [String: String]()
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+        }
+        print("did press favorites countroller")
         GlobalConstants.Person.authenticated(fromController: (self.window?.rootViewController)!) {
             let url = "users/favorite-product"
-            let params = ["_id": self.productId]
+            var params = ["provider":"site"]
             
             if (GlobalConstants.Person.getFavProds().contains(self.productId)) {
-                //                API.delete("\(url)/\(self.productId)") { response in
-                Alamofire.request("http://apivitrine.witharts.kz/api/\(url)/\(self.productId)").responseJSON { response in
+                Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)/\(self.productId)", method: .delete, headers: headers).responseJSON { response in                    
                     switch(response.result) {
                         case .success(_):
                             GlobalConstants.Person.delFavProd(self.productId)
@@ -34,8 +39,9 @@ class FavoriteProductButton: UIButton {
                             }
                 }
             } else {
-                //                API.post(url, params: params) { response in switch(response.result) {
-                Alamofire.request("http://apivitrine.witharts.kz/api/users/login", method: .post, parameters: params as [String : AnyObject]).responseJSON { response in
+                params = ["_id": self.productId]
+                Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", method: .post, parameters: params, headers: headers).responseJSON { response in
+                    print("product id \(self.productId)")
                     switch(response.result) {
                         case .success(_):
                             GlobalConstants.Person.addFavProd(self.productId)

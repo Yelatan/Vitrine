@@ -19,6 +19,7 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
     var searchString = ""
     var favorite = false
     
+    @IBOutlet weak var notificationView: UIView!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchButton: UIBarButtonItem!
     
@@ -65,7 +66,7 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
         
         title = mall.name
         if mall.logo != nil {
-//            logoView.imageURL = API.imageURL("malls/logo", string: mall.logo!)
+            logoView.imageURL = API.imageURL("malls/logo", string: mall.logo!)
         }
         vitrinesTableView.delegate = self
         drawerScrollView.bottomConstraint = drawerScrollViewBottom
@@ -78,7 +79,7 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
         self.vitrinesTableView.tableView.contentOffset = CGPoint(x: 0, y: -200)
         if mall.photos.count > 0 && imagePagerView.imageCount == 0 {
             for photo in mall.photos {
-//                imagePagerView.addImageURL(API.imageURL("malls/photos", string: photo))
+                imagePagerView.addImageURL(API.imageURL("malls/photos", string: photo))
             }
         }
     }
@@ -118,11 +119,13 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
         var headers = [String: String]()
         var url = "vitrines"
         
-        headers["page"] = "\(page)"
-        headers["page-size"] = "\(pageSize)"
+//        headers["page"] = "\(page)"
+//        headers["page-size"] = "\(pageSize)"
+        headers["Authorization"] = nil
         
         if (favorite) {
             url = "users/favorite-vitrines"
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
         }
         
         if (mall != nil) {
@@ -143,20 +146,26 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
         params.main("expand", value: "_networkId:logo name description")
         
 //        Alamofire.request(url, method: .post, parameters: params, headers: headers).responseJSON { (response) in
-        Alamofire.request(url, parameters: params.get(), headers: headers).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get(), headers: headers).responseJSON { response in            
             switch response.result {
             case .success(let JSON):
                 let data = Vitrine.fromJSONArray(JSON as AnyObject)
-                self.vitrinesTableView.vitrines.append(contentsOf: data)
+//                self.vitrinesTableView.vitrines.append(contentsOf: data)
+                self.vitrinesTableView.vitrines = data
                 
+                if data.count == 0 {
+                    self.notificationView.isHidden = false                    
+                }else{
+                    self.notificationView.isHidden = true
+                }
                 if(data.count < self.pageSize) {
                     self.vitrinesTableView.moreDataAvailable = false
                 } else {
                     self.page += 1
-                }
+                }                
             case .failure(let error):
                 print(error)
-            }
+                }
             }
         }
 

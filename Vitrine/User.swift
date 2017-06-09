@@ -58,17 +58,7 @@ class User: NSObject, AuthDelegate {
         refreshData()
     }
     
-    func updatePersonalData(_ JSON: AnyObject) {
-//            for acc in (accounts as? NSDictionary)!{                
-//                if acc["_id"] != nil {
-//                    self.addSocialAcc(acc["provider"] as! String, id: acc["_id"] as! String)
-//                }
-                
-//                if acc.key as? String != nil{
-//                    self.addSocialAcc(acc.value as! String, id: acc.key as! String)
-//                }
-//            }
-        
+    func updatePersonalData(_ JSON: AnyObject) {        
         if let accounts = JSON["_accounts"] as? NSArray {
             for accs in accounts{
                 if let dataAccount = accs as? NSDictionary{

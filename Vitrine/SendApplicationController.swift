@@ -38,11 +38,11 @@ class SendApplicationController: UIViewController, UITextFieldDelegate {
         }
         
 //        API.post("users/send-request", params: params.get() as [String : AnyObject], encoding: <#URLEncoding.Destination#>) { response in
-        Alamofire.request("http://apivitrine.witharts.kz/api/users/profile", parameters: params.get() as! [String : AnyObject]).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/profile", method: .post, parameters: params.get() as! [String : AnyObject]).responseJSON { response in
             switch(response.result) {
                 case .success(let JSON):
 //                    SVProgressHUD.showSuccess(withStatus: JSON["message"] as! String)
-                SVProgressHUD.showSuccess(withStatus: "SendApplicationController")
+                SVProgressHUD.showSuccess(withStatus: "Отправлено")
                 case .failure(_):
                     SVProgressHUD.showError(withStatus: "Ошибка")
             }

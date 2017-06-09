@@ -57,6 +57,8 @@ protocol ProductsTableViewDelegate {
     func reset() {
         products = [Product]()
         moreDataAvailable = true
+        print("moredataavailable")
+        print(moreDataAvailable)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -47,7 +47,7 @@ class Network: Mappable {
         if JSON.count > 0 {
             for item in JSON as! NSArray {
                 let n = Mapper<Network>().map(item as? AnyObject)!
-                networks.append(n)
+                networks.append(n)                
             }
         }
         return networks

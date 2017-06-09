@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,7 +30,10 @@
                     </connections>
                 </scrollView>
                 <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="fvI-lv-7g1">
-                    <rect key="frame" x="116" y="5" width="39" height="37"/>
+                    <rect key="frame" x="211" y="154" width="39" height="37"/>
+                    <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <color key="pageIndicatorTintColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="currentPageIndicatorTintColor" red="0.50196081400000003" green="0.0" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="didClickPageControl:" destination="-1" eventType="valueChanged" id="sHW-gG-4fV"/>
                     </connections>
@@ -43,9 +45,9 @@
                 <constraint firstItem="ub2-lI-Jdj" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="9xY-Tp-WgY"/>
                 <constraint firstAttribute="bottom" secondItem="ub2-lI-Jdj" secondAttribute="bottom" id="ACW-HD-cdb"/>
                 <constraint firstItem="ub2-lI-Jdj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HsB-7C-U0z"/>
+                <constraint firstAttribute="bottom" secondItem="fvI-lv-7g1" secondAttribute="bottom" constant="5" id="K9F-ci-cRN"/>
+                <constraint firstAttribute="trailing" secondItem="fvI-lv-7g1" secondAttribute="trailing" constant="20" id="Ma7-D2-FAG"/>
                 <constraint firstAttribute="trailing" secondItem="Etu-wS-5kE" secondAttribute="trailing" id="ObM-ee-9GL"/>
-                <constraint firstItem="fvI-lv-7g1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="ZFi-UO-4Z9"/>
-                <constraint firstItem="fvI-lv-7g1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jwd-QH-QV4"/>
                 <constraint firstItem="ub2-lI-Jdj" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="kFB-K0-3dH"/>
                 <constraint firstItem="Etu-wS-5kE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rWJ-lQ-byj"/>
                 <constraint firstAttribute="trailing" secondItem="ub2-lI-Jdj" secondAttribute="trailing" id="t6o-3H-D29"/>
