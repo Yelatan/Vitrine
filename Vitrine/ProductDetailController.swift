@@ -60,12 +60,15 @@ class ProductDetailController: UIViewController, UICollectionViewDataSource, UIS
         var objectsToShare: [AnyObject] = [text as AnyObject]
 
         if product.photos.count > 0 {
-            let cell = imageCollectionView.cellForItem(at: IndexPath(row: 0, section: 0))!
-            let imageView = cell.viewWithTag(1) as! UIImageView
-            let image: UIImage? = imageView.image            
-            if image != nil {
-                objectsToShare.append(image!)
+            if imageCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) != nil {
+                let cell = imageCollectionView.cellForItem(at: IndexPath(row: 0, section: 0))!
+                let imageView = cell.viewWithTag(1) as! UIImageView
+                let image: UIImage? = imageView.image
+                if image != nil {
+                    objectsToShare.append(image!)
+                }
             }
+            
         }
         
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

@@ -61,10 +61,9 @@ class Mall: Mappable, MapObject {
     func calcDistance(_ location: [Double]) -> Double {
         //didn't fix because of locations is empty
         if location.count > 0 && self.coordinates.count > 0{
-                let loc1 = CLLocation.init(latitude: location[1], longitude: location[0])
-                let loc2 = CLLocation.init(latitude: self.coordinates[1], longitude: self.coordinates[0])
-            print("\(loc1) |||| \(loc2)")
-                return loc1.distance(from: loc2)/1000
+            let loc1 = CLLocation.init(latitude: location[1], longitude: location[0])
+            let loc2 = CLLocation.init(latitude: self.coordinates[1], longitude: self.coordinates[0])
+            return loc1.distance(from: loc2)/1000
         }else {
             return -1.0
         }

@@ -435,6 +435,31 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
                 let dict = data?["raw"] as! [String:AnyObject]
                 print(dict)
                 let dict2 = dict["uid"]
+                
+                
+                for (key, value) in dict {
+                    print("\(value)")
+                    
+                    let itedict = value as! NSArray
+                    for ii in itedict{
+                        let jsson = ii as! [String:AnyObject]
+                        print((jsson["first_name"] as? String)!)
+                        identity = "\((jsson["uid"] as? AnyObject)!)"
+                    }
+                }
+                
+//                identity = "id"
+            case "facebook":
+                print("facebook")
+                let dict = data?["raw"] as! [String:AnyObject]
+                print(dict)
+                let dict2 = dict["uid"]
+                identity = "id"
+            case "gmail":
+                print("gmail")
+                let dict = data?["raw"] as! [String:AnyObject]
+                print(dict)
+                let dict2 = dict["uid"]
                 identity = "id"
             default:
                 print("didn't fix")

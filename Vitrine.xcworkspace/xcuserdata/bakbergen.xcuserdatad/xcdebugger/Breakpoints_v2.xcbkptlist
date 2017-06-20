@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vitrine/ProfileController.swift"
-            timestampString = "518692404.143869"
+            timestampString = "519641315.365417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
             landmarkName = "didReceiveOAuthIOResponse(_:)"
             landmarkType = "7">
          </BreakpointContent>

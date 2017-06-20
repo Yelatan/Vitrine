@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MallsTableViewCell" rowHeight="270" id="Ki7-jM-v4j" customClass="MallsTableViewCell" customModule="Vitrine" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MallsTableViewCell" rowHeight="109" id="Ki7-jM-v4j" customClass="MallsTableViewCell" customModule="Vitrine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="179"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ki7-jM-v4j" id="gQG-fK-0F0">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="269.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="178.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="DBV-fO-PbQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="209"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="178.5"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHE-TY-oRf" customClass="MallsTableViewCell" customModule="Vitrine" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="209" width="320" height="60"/>
+                        <rect key="frame" x="0.0" y="118.5" width="320" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 мин назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMf-2T-EJL">
                                 <rect key="frame" x="63" y="30" width="87" height="15"/>
@@ -88,7 +88,7 @@
                     <constraint firstAttribute="trailing" secondItem="SHE-TY-oRf" secondAttribute="trailing" id="aPy-Wa-gQS"/>
                     <constraint firstItem="SHE-TY-oRf" firstAttribute="leading" secondItem="gQG-fK-0F0" secondAttribute="leading" id="lmz-Z8-AS6"/>
                     <constraint firstAttribute="trailing" secondItem="DBV-fO-PbQ" secondAttribute="trailing" id="m2X-Cx-Bka"/>
-                    <constraint firstAttribute="bottom" secondItem="DBV-fO-PbQ" secondAttribute="bottom" constant="60" id="uWp-jV-vy8"/>
+                    <constraint firstAttribute="bottom" secondItem="DBV-fO-PbQ" secondAttribute="bottom" id="uWp-jV-vy8"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -104,6 +104,7 @@
                 <outlet property="rangeLabel" destination="dfA-GP-8gl" id="ZDM-Rg-yn3"/>
                 <outlet property="titleLabel" destination="3lA-3W-w8d" id="K91-21-dhd"/>
             </connections>
+            <point key="canvasLocation" x="34" y="8.5"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67167DA91EF5998E00B1E7AA /* BrushScriptMT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67167DA81EF5998E00B1E7AA /* BrushScriptMT.ttf */; };
 		673759311EB07EDD00B1F91D /* CustomDateFormatTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673759291EB07EDD00B1F91D /* CustomDateFormatTransform.swift */; };
 		673759321EB07EDD00B1F91D /* DateFormatterTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6737592A1EB07EDD00B1F91D /* DateFormatterTransform.swift */; };
 		673759331EB07EDD00B1F91D /* DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6737592B1EB07EDD00B1F91D /* DateTransform.swift */; };
@@ -348,6 +349,7 @@
 		10E31EACD084CAEC17E0AC47 /* Pods_Vitrine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vitrine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C81F4BF55628EAE6A491176 /* Pods-Vitrine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitrine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vitrine/Pods-Vitrine.release.xcconfig"; sourceTree = "<group>"; };
 		5D2F4818AAFFC815052AE562 /* Pods-Vitrine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitrine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vitrine/Pods-Vitrine.debug.xcconfig"; sourceTree = "<group>"; };
+		67167DA81EF5998E00B1E7AA /* BrushScriptMT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BrushScriptMT.ttf; sourceTree = "<group>"; };
 		673759291EB07EDD00B1F91D /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDateFormatTransform.swift; sourceTree = "<group>"; };
 		6737592A1EB07EDD00B1F91D /* DateFormatterTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterTransform.swift; sourceTree = "<group>"; };
 		6737592B1EB07EDD00B1F91D /* DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTransform.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 		67C351AD1EA6374300D5F95D /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				67167DA81EF5998E00B1E7AA /* BrushScriptMT.ttf */,
 				67DC57641ECB170E00EEC5CC /* CLabsImageSlider.swift */,
 				67C3526D1EA6385800D5F95D /* SWRevealViewController */,
 				67C351B51EA637B900D5F95D /* Vitrine-Bridging-Header.h */,
@@ -1125,6 +1128,7 @@
 				67C352291EA6382500D5F95D /* NetworkTableViewCell.xib in Resources */,
 				67C351821EA6367A00D5F95D /* Main.storyboard in Resources */,
 				67C353081EA6391000D5F95D /* Vitrines.storyboard in Resources */,
+				67167DA91EF5998E00B1E7AA /* BrushScriptMT.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

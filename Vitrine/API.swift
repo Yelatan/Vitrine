@@ -12,7 +12,6 @@ import Alamofire
 class API {
     
     static func imageURL(_ prefix: String, string: String) -> URL {
-        print(URL(string: "\(GlobalConstants.baseURL)/uploads/\(prefix)/1x/\(string)")!)
         return URL(string: "\(GlobalConstants.baseURL)/uploads/\(prefix)/1x/\(string)")!
         //http://manager.vitrine.kz:3000/api/uploads/vitrines/photos/1x/EkkY2mSJ7.jpg
 //        return URL(string: "http://manager.vitrine.kz:3000/api/uploads/vitrines/photos/1x/EkkY2mSJ7.jpg")!

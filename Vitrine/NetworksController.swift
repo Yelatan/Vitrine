@@ -187,7 +187,7 @@ class NetworksController: UIViewController, FilterDelegate, VTableViewDelegate, 
         }
         
         if (!searchString.isEmpty) {
-            params.find["search"] = searchString as AnyObject
+            params.find["search"] = searchString as AnyObject            
         }
         
         

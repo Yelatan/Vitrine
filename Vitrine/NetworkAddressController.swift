@@ -28,10 +28,11 @@ class NetworkAddressController: UITableViewController {
         let  params2 = params.get()
         if networkId != nil {
 //            API.get("networks/\(networkId)/vitrines", params: params) { response in
-            Alamofire.request("http://manager.vitrine.kz:3000/api/networks/\(self.networkId!)", parameters:params.get(), headers: headers).responseJSON { response in                                
+            Alamofire.request("http://manager.vitrine.kz:3000/api/networks/\(self.networkId!)/vitrines", parameters:params.get()).responseJSON { response in
+                print(response)
                 switch(response.result) {
                 case .success(let JSON):
-                    print("json")
+                    print("address success")
                     self.vitrines = Vitrine.fromJSONArray(JSON as AnyObject)
                     self.tableView.reloadData()
                 case .failure(let error):

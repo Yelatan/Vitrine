@@ -26,9 +26,6 @@ import UIKit
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "MallsTableViewCell") as! MallsTableViewCell
-//        cell.mall = malls[indexPath.row]
-//        return cell        
         let cell1 = Bundle.main.loadNibNamed("MallsTableViewCell", owner: self, options: nil)?.first as! MallsTableViewCell
         cell1.mall = malls[indexPath.row]
         return cell1
@@ -37,6 +34,7 @@ import UIKit
     func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 230
     }
+    
 }
 
 
@@ -59,12 +57,12 @@ class MallsTableViewCell: UITableViewCell {
             rangeLabel.text = ""
             titleLabel.text = mall.name
             detailLabel.text = mall.address
-//            if mall.distance == -1 {
-//                rangeLabel.text = ""
-//            } else {
-//                rangeLabel.text = "\(String(format: "%.2f", mall.distance)) КМ"
-//            }
-//            rangeLabel.text = ""
+            if mall.distance == -1 {
+                rangeLabel.text = ""
+            } else {
+                rangeLabel.text = "\(String(format: "%.2f", mall.distance)) КМ"
+            }
+            rangeLabel.text = ""
         }
     }
 }

@@ -470,8 +470,8 @@ class User: NSObject, AuthDelegate {
             let vc : LoginController = storyboard.instantiateViewController(withIdentifier: "login") as! LoginController
             let nc = AuthNavigationController(rootViewController: vc)
             nc.authDelegate = self
-            
             c.present(nc, animated: true, completion: nil)
+            
         }
     }
     

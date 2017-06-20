@@ -112,33 +112,32 @@ class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate
         var location = [Double]()
         let params = VitrineParams()
         
-        headers["page"] = "\(page)"
-        headers["page-size"] = "\(pageSize)"
+//        headers["page"] = "\(page)"
+//        headers["page-size"] = "\(pageSize)"
+        headers["Authorization"] = nil
         
-//        params.find("disabled", value: "false")
         params.find["disabled"] = "false" as AnyObject
-        
-//        params.find("_cityId", value: GlobalConstants.Person.CityID)
-        params.find["_cityId"] = GlobalConstants.Person.CityID as AnyObject
-        
-        if !searchString.isEmpty {
-//            params.find("search", value: searchString)
-            params.find["search"] = searchString as AnyObject
-        }
-        
-        if geoSort {
-            location = [locManager.location!.coordinate.longitude, locManager.location!.coordinate.latitude]
-//            params.find("coordinates", value: ["$near": location])
-            params.find["coordinates"] = ["$near": location] as AnyObject
-        }
+//        params.find["_cityId"] = GlobalConstants.Person.CityID as AnyObject
         
         if let r = request {
             r.cancel()
         }
         
+        if geoSort {
+            location = [locManager.location!.coordinate.longitude, locManager.location!.coordinate.latitude]
+            //didn't fix
+//            params.find["coordinates"] = ["$near": location] as AnyObject
+            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token)"
+        }else{
+            params.main("expand", value: "_vitrines:address coordinates name")
+            
+        }
+        
+        if (!searchString.isEmpty) {
+            params.find["search"] = searchString as AnyObject
+        }
 //        request = API.get("malls", params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in
-//        request = Alamofire.request("http://apivitrine.witharts.kz/api/malls", parameters: params.get()).responseJSON { response in
-        request = Alamofire.request("http://manager.vitrine.kz:3000/api/malls", parameters: params.params, headers: headers).responseJSON { response in            
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/malls", parameters:params.get(), headers: headers).responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
                 let malls = Mall.fromJSONArray(JSON as AnyObject, withLocation: location)                

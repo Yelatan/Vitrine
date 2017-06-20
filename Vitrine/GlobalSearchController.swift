@@ -168,8 +168,7 @@ class GlobalSearchController: UIViewController, VTableViewDelegate, CLLocationMa
             }
         }
         
-        if (!searchParams.text!.isEmpty) {
-//            params.find("search", value: searchParams.text!)
+        if (searchParams.text != nil) {
             params.find["search"] = searchParams.text! as AnyObject
         }
         

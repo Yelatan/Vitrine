@@ -25,7 +25,7 @@ class AboutController: UIViewController {
     }
     
     @IBAction func reportError(_ sender: Any) {
-        let googleUrlString = "mailto:service@vitrine.kz?&subject=Hello&body=Hi"
+        let googleUrlString = "mailto:service@vitrine.kz?&subject=reportError&body=..."
         if let googleUrl = NSURL(string: googleUrlString) {            
             if UIApplication.shared.canOpenURL(googleUrl as URL) {
                 if #available(iOS 10.0, *) {
@@ -38,9 +38,12 @@ class AboutController: UIViewController {
     }
     
     @IBAction func commentAction(_ sender: Any) {
-        
+        UIApplication.shared.openURL(URL(string: "http://www.vitrine.kz")!)
     }
     @IBAction func supportAction(_ sender: Any) {
-        
+        let numb = "87019999020"
+        if let url = URL(string: "tel://\(numb)") {
+            UIApplication.shared.openURL(url)
+        }
     }
 }

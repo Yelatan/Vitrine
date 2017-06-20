@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BLt-HW-3jx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BLt-HW-3jx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BRUSHSCI.TTF">
+        <array key="BrushScriptMT.ttf">
             <string>BrushScriptMT</string>
         </array>
     </customFonts>
@@ -393,7 +393,7 @@
                         <segue destination="8sD-AA-FDL" kind="custom" identifier="news" customClass="SWRevealViewControllerSeguePushController" id="hpR-rv-tcp"/>
                         <segue destination="Uw7-WK-Epy" kind="custom" identifier="vitrines" customClass="SWRevealViewControllerSeguePushController" id="nHr-BQ-AT1"/>
                         <segue destination="wxh-6X-H3O" kind="custom" identifier="malls" customClass="SWRevealViewControllerSeguePushController" id="eUL-LP-C39"/>
-                        <segue destination="Hi0-gz-SoM" kind="modal" identifier="authentication" id="XZd-1d-cjo"/>
+                        <segue destination="Hi0-gz-SoM" kind="custom" identifier="authentication" customClass="SWRevealViewControllerSeguePushController" id="XZd-1d-cjo"/>
                         <segue destination="ER6-hX-DjX" kind="custom" identifier="favourites" customClass="SWRevealViewControllerSeguePushController" id="LTF-dv-YVP"/>
                         <segue destination="TuU-NL-05J" kind="modal" identifier="search" id="7xs-Cg-2Xa"/>
                     </connections>
@@ -468,7 +468,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vitrine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFc-4P-ZDf">
-                                        <rect key="frame" x="110" y="4" width="100" height="35"/>
+                                        <rect key="frame" x="110" y="4" width="100" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="yUS-nd-G33"/>
                                         </constraints>
@@ -603,7 +603,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="580"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vitrine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyZ-gd-FFL">
-                                                        <rect key="frame" x="118" y="20" width="139" height="45"/>
+                                                        <rect key="frame" x="135.5" y="20" width="104" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="W1r-Ob-nvf"/>
                                                         </constraints>
@@ -855,6 +855,6 @@
         <image name="reveal-icon.png" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PYv-7g-exk"/>
+        <segue reference="hpR-rv-tcp"/>
     </inferredMetricsTieBreakers>
 </document>

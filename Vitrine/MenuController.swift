@@ -75,8 +75,13 @@ class MenuController: UITableViewController, UITextFieldDelegate {
         case 2:
             super.performSegue(withIdentifier: "search", sender: nil)
         case 1:
-            GlobalConstants.Person.authenticated(fromController: self) {
+//            GlobalConstants.Person.authenticated(fromController: self) {
+//                super.performSegue(withIdentifier: "profile", sender: nil)
+//            }
+            if GlobalConstants.Person.hasToken(){
                 super.performSegue(withIdentifier: "profile", sender: nil)
+            }else{
+                super.performSegue(withIdentifier: "authentication", sender: nil)
             }
         case 3:
             super.performSegue(withIdentifier: "news", sender: nil)

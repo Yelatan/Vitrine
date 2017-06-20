@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="frs-dc-CWK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="frs-dc-CWK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -143,7 +143,7 @@
                         <barButtonItem key="backBarButtonItem" style="plain" id="26c-EC-f3B">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
-                        <barButtonItem key="leftBarButtonItem" image="icon_close" id="OO3-Kv-qDt">
+                        <barButtonItem key="leftBarButtonItem" image="reveal-icon" id="OO3-Kv-qDt">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -421,11 +421,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_close" width="25" height="25"/>
         <image name="icon_share" width="128" height="128"/>
         <image name="list_tab_default" width="20" height="20"/>
         <image name="list_tab_selected" width="20" height="20"/>
         <image name="navbar_fav" width="22" height="22"/>
         <image name="navbar_search" width="22" height="22"/>
+        <image name="reveal-icon" width="30" height="30"/>
     </resources>
 </document>
