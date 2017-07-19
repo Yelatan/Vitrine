@@ -38,7 +38,8 @@ class ProductCategory: Mappable {
     static func fromJSONArray(_ JSON: AnyObject) -> [ProductCategory] {
         var categories = [ProductCategory]()
         if JSON.count > 0 {
-            for item in JSON as! NSArray {
+            for item in JSON as! NSArray {                                
+                GlobalConstants.showCategory = true
                 categories.append(Mapper<ProductCategory>().map(item as AnyObject)!)
             }
         }        

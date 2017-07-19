@@ -500,6 +500,7 @@
                         <outlet property="rePasswordField" destination="QdG-nR-oON" id="pCW-ry-2aE"/>
                         <outlet property="scrollViewBottom" destination="SIS-uR-3sr" id="Ohu-lc-3Y6"/>
                         <outlet property="scrollViewContentHeight" destination="mez-Fz-XcD" id="g9r-37-eTk"/>
+                        <segue destination="XTm-8e-0D5" kind="custom" identifier="loginPush" customClass="SWRevealViewControllerSeguePushController" id="LFY-ch-23c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tM2-9U-I0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -824,4 +825,7 @@ e-mail: info@vitrine.kz
         <image name="navbar_back" width="44" height="44"/>
         <image name="reveal-icon.png" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="WSI-FV-2WM"/>
+    </inferredMetricsTieBreakers>
 </document>

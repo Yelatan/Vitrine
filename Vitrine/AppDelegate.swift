@@ -18,17 +18,27 @@ struct GlobalConstants {
     static var sub_category_id:String = "0"
     static var sub2_category_id:String = "0"
     static var sub3_category_id:String = "0"
+    static var needBool = false
+    public static var fromReveal = true
+    public static var showCategory = true
 }
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -120), for: UIBarMetrics.default)
+        //Google Sing in
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        GIDSignIn.sharedInstance().delegate = self
+        
         // Override point for customization after application launch.
 //        Parse.enableLocalDatastore()
         
@@ -39,10 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [Optional] Track statistics around application opens.
 //        PFAnalytics.trackAppOpened(launchOptions: launchOptions)
         
-        GMSServices.provideAPIKey("AIzaSyCx733GK-sIQlw5FZ9u-IPLUCtec3lJZng")//dal Bako
-        //AIzaSyDo3G3SJ22PYq_-pPMiILHhcXy_yt4IL1c
-        
-//        GMSServices.provideAPIKey("AIzaSyDo3G3SJ22PYq_-pPMiILHhcXy_yt4IL1c")
+        GMSServices.provideAPIKey("AIzaSyCx733GK-sIQlw5FZ9u-IPLUCtec3lJZng")
         
         // Register for Push Notitications
         if application.applicationState != UIApplicationState.background {
@@ -73,6 +80,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */
         return true
     }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error != nil){
+            print("we got a sign in error \(error)")
+        }else{
+            print("user sign in \(user)")
+        }
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+            return GIDSignIn.sharedInstance().handle(url as URL!, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    
+   
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        return GIDSignIn.sharedInstance().handle(url as URL!,sourceApplication: sourceApplication,annotation: annotation)
+    }
+    
     
 //    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
 //        let installation = PFInstallation.currentInstallation()

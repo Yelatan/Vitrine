@@ -42,7 +42,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(╯°□°）╯︵ ┻━┻" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqb-ss-gF8">
-                                <rect key="frame" x="63" y="13" width="187" height="18"/>
+                                <rect key="frame" x="63" y="13" width="140.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Na0-3X-FGz"/>
                                 </constraints>
@@ -55,16 +55,15 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.1 КМ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDV-rT-2H9">
-                                <rect key="frame" x="255" y="19" width="66" height="21"/>
+                                <rect key="frame" x="265" y="19" width="46" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="66" id="7aC-k5-qY0"/>
                                     <constraint firstAttribute="height" constant="21" id="J7m-Hi-e8i"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqI-Zz-AQ5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqI-Zz-AQ5">
                                 <rect key="frame" x="63" y="32" width="186" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -75,15 +74,13 @@
                         <constraints>
                             <constraint firstItem="Qqb-ss-gF8" firstAttribute="top" secondItem="h54-n5-maw" secondAttribute="top" constant="5" id="18O-9g-QLW"/>
                             <constraint firstItem="fDV-rT-2H9" firstAttribute="centerY" secondItem="h54-n5-maw" secondAttribute="centerY" id="4MK-6z-BFr"/>
-                            <constraint firstAttribute="trailing" secondItem="fDV-rT-2H9" secondAttribute="trailing" id="Egg-SX-QTe"/>
+                            <constraint firstAttribute="trailing" secondItem="fDV-rT-2H9" secondAttribute="trailing" constant="10" id="Egg-SX-QTe"/>
                             <constraint firstItem="Qqb-ss-gF8" firstAttribute="leading" secondItem="h54-n5-maw" secondAttribute="leading" constant="63" id="Hm1-az-X5P"/>
                             <constraint firstAttribute="bottom" secondItem="SqI-Zz-AQ5" secondAttribute="bottom" constant="5" id="JqX-hf-TPb"/>
-                            <constraint firstItem="fDV-rT-2H9" firstAttribute="leading" secondItem="SqI-Zz-AQ5" secondAttribute="trailing" constant="5" id="K1E-BE-LQD"/>
                             <constraint firstItem="Qqb-ss-gF8" firstAttribute="centerY" secondItem="h54-n5-maw" secondAttribute="centerY" constant="-8" id="ThV-ue-aet"/>
                             <constraint firstItem="alx-TQ-leq" firstAttribute="leading" secondItem="h54-n5-maw" secondAttribute="leadingMargin" id="X8v-yC-Ddh"/>
                             <constraint firstItem="SqI-Zz-AQ5" firstAttribute="leading" secondItem="h54-n5-maw" secondAttribute="leading" constant="63" id="cqa-m9-1NM"/>
                             <constraint firstItem="alx-TQ-leq" firstAttribute="centerY" secondItem="h54-n5-maw" secondAttribute="centerY" id="dj6-rd-2aX"/>
-                            <constraint firstItem="fDV-rT-2H9" firstAttribute="leading" secondItem="Qqb-ss-gF8" secondAttribute="trailing" constant="5" id="hpc-Ow-89J"/>
                             <constraint firstItem="SqI-Zz-AQ5" firstAttribute="top" secondItem="Qqb-ss-gF8" secondAttribute="bottom" constant="1" id="slo-KN-qU8"/>
                             <constraint firstAttribute="height" constant="60" id="ttq-Jg-I3g"/>
                         </constraints>
@@ -94,7 +91,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="rr4-V2-uiM">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="rr4-V2-uiM">
                         <rect key="frame" x="0.0" y="0.0" width="321" height="140"/>
                     </imageView>
                 </subviews>

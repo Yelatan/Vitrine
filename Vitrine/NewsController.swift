@@ -10,18 +10,24 @@ import UIKit
 import Alamofire
 
 
-class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate {
+class NewsController: UIViewController, VTableViewDelegate, FilterDelegate, UISearchBarDelegate {
+
     @IBOutlet var searchBar: UISearchBar!
 
     @IBOutlet var menuButton: UIBarButtonItem!
     @IBOutlet var searchButton: UIBarButtonItem!
     @IBOutlet var favButton: UIBarButtonItem!
     
+    @IBOutlet var drawerScrollViewBottom: NSLayoutConstraint!
+    @IBOutlet var drawerScrollView: DrawerScrollView!
     @IBOutlet weak var tabsView: UIView!
     @IBOutlet weak var newsTableView: NewsTableView!
     @IBOutlet weak var tabEventsButton: UIButton!
     @IBOutlet weak var tabOffersButton: UIButton!
+    var locManager = CLLocationManager()
     
+    var categoryId = ""
+    var favorite = false
     var request: Alamofire.Request?
     var favFilter = false {
         didSet {
@@ -55,6 +61,9 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         }
     }
     
+    @IBAction func didClickFilterToggle(_ sender: Any) {
+        drawerScrollView.toggle()
+    }
     @IBAction func didClickSearchButton(_ sender: AnyObject) {
         showSearchBar()
     }
@@ -94,6 +103,13 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         }
         favFilter = false
         newsTableView.delegate = self
+        newsTableView.hiddenKeyboardPadding = 44
+        locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+//        locManager.delegate = self as! CLLocationManagerDelegate
+        locManager.requestWhenInUseAuthorization()
+        locManager.startUpdatingLocation()
+        
+        drawerScrollView.bottomConstraint = drawerScrollViewBottom
     }
     
     func vTableView<News>(didSelectItem item: News) {
@@ -101,24 +117,50 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! NewsDetailController
-        controller.news = sender as! News
+        switch(segue.identifier!) {
+        case "NewsDetail":
+            let controller = segue.destination as! NewsDetailController
+            controller.news = sender as! News
+//            let controller = segue.destination as! ProductsController
+//            let network = sender as? Network
+//            if network!.vitrines.count == 1 {
+//                controller.vitrineId = network!.vitrines[0].id
+//            }
+//            else {
+//                controller.network = sender as? Network
+//            }
+
+        case "EmbeddedFilterSegue":
+            let filterViewController = segue.destination as! FilterController
+            filterViewController.filterDelegate = self
+        default:
+            return
+        }
     }
     
     func vTableViewDidRequestMoreData() {
         var url = ""
         var headers = [String: String]()
-        
         let params = VitrineParams()
-        
 //        headers["page"] = "\(page)"
 //        headers["page-size"] = "\(pageSize)"
         headers["Authorization"] = nil
-        
-        params.main("expand", value: "_networkId:name logo,_vitrines:address")
-//        params.find("disabled", value: "false")
         params.find["disabled"] = "false" as AnyObject
         
+        params.main("expand", value: "_networkId:name logo,_vitrines:address name _cityId")
+        if GlobalConstants.Person.CityID != nil {
+            params.find["_cityId"] = GlobalConstants.Person.CityID! as AnyObject
+        }
+        
+        
+        if let r = request {
+            r.cancel()
+        }
+        
+        if (!categoryId.isEmpty) {
+//            params.find["_categories"] = categoryId as AnyObject
+            params.find["categoryId"] = categoryId as AnyObject
+        }
         if (favFilter) {
             url = "users/favorite-networks/news"
             headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
@@ -127,29 +169,20 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         }
         
         if (!searchString.isEmpty) {
-//            params.find("search", value: searchString)
             params.find["search"] = searchString as AnyObject
         }
         
         if (type == "0") {
-//            params.find("type", value: "stock")
             params.find["type"] = "stock" as AnyObject
-            
         }
         
-        if let r = request {
-            r.cancel()
-        }
-        
-//        request = API.get("\(url)", params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in
-//         request = Alamofire.request("http://apivitrine.witharts.kz/api/users/login", method: .get, parameters: params as [String : AnyObject], headers: headers).
-       //Bakohttp://manager.vitrine.kz:3000/api
-        Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get(),headers: headers).responseJSON { response in
-            print("http://manager.vitrine.kz:3000/api/\(url)")
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get(),headers: headers).responseJSON { response in
+            print(params.get())
             switch(response.result) {
             case .success(let JSON):
                 let news = News.fromJSONArray(JSON as AnyObject)
-                self.newsTableView.news.append(contentsOf: news)
+                self.newsTableView.news = news
+                
                 if(news.count < self.pageSize) {
                     self.newsTableView.moreDataAvailable = false
                 }else {
@@ -166,6 +199,15 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
         }
     }
     
+    func onFilter(_ id: String) {
+        categoryId = id
+        refreshList()
+    }
+    func onFavorite() {
+        favFilter = !favFilter
+        refreshList()
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismissSearchBar()
         searchString = ""
@@ -173,7 +215,7 @@ class NewsController: UIViewController, VTableViewDelegate, UISearchBarDelegate 
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.characters.count > 2 || searchString.characters.count > searchText.characters.count) {
+        if(searchText.characters.count > 1 || searchString.characters.count > searchText.characters.count) {
             searchString = searchText
             refreshList()
         }

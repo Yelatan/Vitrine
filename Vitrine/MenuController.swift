@@ -39,14 +39,23 @@ class MenuController: UITableViewController, UITextFieldDelegate {
             name.text = "Введите имя"
         }
         
-        detail.text = GlobalConstants.Person.CityName
+        if (GlobalConstants.Person.hasCityName()){
+            print(GlobalConstants.Person.hasCityName())
+            detail.text = GlobalConstants.Person.getCityName()
+            print(GlobalConstants.Person.getCityName())
+        }else{
+            detail.text = "Введите city"
+        }
         
+        detail.text = GlobalConstants.Person.CityName
         if (GlobalConstants.Person.getFavProds().count > 0) {
             favBadgeView.text = String(GlobalConstants.Person.getFavProds().count)
+            favBadgeView.isHidden = false            
         }
         else {
             favBadgeView.isHidden = true
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +63,9 @@ class MenuController: UITableViewController, UITextFieldDelegate {
         overlay.frame = revealViewController().frontViewController.view.bounds
         revealViewController().frontViewController.view.addSubview(overlay)
         revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,6 +93,7 @@ class MenuController: UITableViewController, UITextFieldDelegate {
             if GlobalConstants.Person.hasToken(){
                 super.performSegue(withIdentifier: "profile", sender: nil)
             }else{
+                GlobalConstants.fromReveal = false
                 super.performSegue(withIdentifier: "authentication", sender: nil)
             }
         case 3:

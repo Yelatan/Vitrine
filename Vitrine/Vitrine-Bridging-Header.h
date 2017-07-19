@@ -13,3 +13,4 @@
 #import "UIScrollView+APParallaxHeader.h"
 #import "UIScrollView+InfiniteScroll.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import <Google/SignIn.h>

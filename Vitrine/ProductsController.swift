@@ -173,9 +173,11 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
             networkId = vitrine!.networkId
             if network != nil {
                 logoView.imageURL = API.imageURL("networks/logo", string: network!.logo!)
+                pickAddressButton.setTitle(vitrine?.address, for: UIControlState())
             }
             else {
-//                logoView.imageURL = API.imageURL("networks/logo", string: vitrine!.networkLogo!)
+                logoView.imageURL = API.imageURL("networks/logo", string: vitrine!.networkLogo!)
+                pickAddressButton.isHidden = true
             }
 //            if vitrine!.photos.count > 0 && imagePagerView.imageCount == 0 {
 //                for photo in vitrine!.photos {
@@ -188,7 +190,7 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
                 vitrinePhotoUrls.append(String(describing: API.imageURL("vitrines/photos", string: photo)))
             }            
             swipeImages.setUpView(imageSource: .Url(imageArray:vitrinePhotoUrls,placeHolderImage:UIImage(named:"ryba_vitrine_logo")),slideType:.ManualSwipe,isArrowBtnEnabled: true)
-            pickAddressButton.setTitle(vitrine?.address, for: UIControlState())
+            
             productsCollectionView.delegate = self
         }
         else if network != nil {
@@ -296,37 +298,36 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
         
         headers["page"] = "\(page)"
         headers["page-size"] = "\(pageSize)"        
-        if (GlobalConstants.Person.token != nil){
-            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
-        }
-        
+
         params.searchParams(searchParams)
-        params.main("expand", value: "_networkId:name,_brandId:name,_vitrines:coordinates name")
+        params.main("expand", value: "_networkId:name,_brandId:name")
         
         if favButton.isSelected {
+            if (GlobalConstants.Person.hasToken()) {
+                headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+            }
             url = "users/favorite-products"
             if vitrine != nil {
-//                params.find("_vitrines", value: vitrine!.id)
                 params.find["_vitrines"] = vitrine!.id as AnyObject
                 
             } else {
-//                params.find("_networkId", value: network!.id)
                 params.find["_networkId"] = network!.id as AnyObject
             }
         } else {
             if vitrine != nil {
-                url = "vitrines/\(vitrine!.id as AnyObject)/products"
+                url = "vitrines/\(vitrine!.id)/products"
             } else {
-                url = "networks/\(network!.id as AnyObject)/products"
+                url = "networks/\(network!.id)/products"
             }
+            
         }
         
         if let r = request {
             r.cancel()
         }
-//        request = API.get(url, params: params, encoding: <#URLEncoding.Destination#>) {response in
-        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url!)", parameters: params.find).responseJSON {
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url!)", parameters: params.get(), headers: headers).responseJSON {
             response in
+            print(params.get())
                 switch(response.result) {
                 case .success(let JSON):
                     let products = Product.fromJSONArray(JSON as AnyObject)
@@ -343,7 +344,12 @@ class ProductsController: UIViewController, vCollectionViewDelegate {
                         } else {
                             self.page += 1
                         }
-                    } else {
+                        print(products.count)
+                        if products.count == 0 {
+                            SVProgressHUD.show(UIImage(named: "asd"), status: "Пусто")
+                        }
+                    }
+                    else {
                         self.infoView.addParallax(with: self.headerView, andHeight: 200, andShadow: false)
                         self.infoView.contentOffset = CGPoint(x: 0, y: -200)
                         self.infoView.isHidden = false

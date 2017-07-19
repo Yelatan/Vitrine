@@ -23,6 +23,7 @@ class News: Mappable {
     var networkName: String?
     var networkLogo: String?
     var vitrineAddress: String?
+    var cityId: String?
     
     required init?(_ map: Map) {
         
@@ -41,16 +42,40 @@ class News: Mappable {
         networkName <- map["_networkId.name"]
         networkLogo <- map["_networkId.logo"]
         vitrineAddress <- map["_vitrines.0.address"]
+        cityId <- map["_cityId"]
     }
     
     static func fromJSONArray(_ JSON: AnyObject) -> [News] {
         var products = [News]()
-        if (JSON.count != 0) {
+        if (JSON.count != 0) {            
             for item in JSON as! NSArray {
                 products.append(Mapper<News>().map(item as AnyObject)!)
             }
         }
-        
         return products
     }
+    
+    
+//    static func fromJSONArray(_ JSON: AnyObject) -> [News] {
+//        var news = [News]()
+//        var news2 = [News]()
+//        var count = 0        
+//        if JSON.count != 0 {
+//            for item in JSON as! NSArray {
+//                let n = Mapper<News>().map(item as? AnyObject)!
+//                news.append(n)
+//                if news[count].cityId != nil {
+//                    let vitrineCityId = news[count].cityId!
+//                    if GlobalConstants.Person.CityID != nil {
+//                        let cityIdd = GlobalConstants.Person.CityID!
+//                        if vitrineCityId == "\(cityIdd)"{
+//                            news2.append(n)
+//                        }
+//                    }
+//                }
+//                count += 1
+//            }
+//        }
+//        return news2
+//    }
 }

@@ -231,7 +231,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oeK-6k-fkx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="N60-SV-Sxs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="N60-SV-Sxs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -394,7 +394,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8A9-86-QrF">
-                                                    <rect key="frame" x="310" y="5" width="51" height="32"/>
+                                                    <rect key="frame" x="310" y="5.5" width="51" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="GOb-rh-ara"/>
                                                         <constraint firstAttribute="height" constant="32" id="ZAb-kB-Bvp"/>

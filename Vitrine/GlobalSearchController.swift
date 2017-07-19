@@ -113,7 +113,7 @@ class GlobalSearchController: UIViewController, VTableViewDelegate, CLLocationMa
             controller.title = title
         case "Vitrine":
             let controller = segue.destination as! ProductsController
-//            controller.vitrine = sender as! Vitrine
+            controller.vitrine = sender as! Vitrine
             controller.network = sender as! Network
         case "SearchSettings":
             let controller = segue.destination as! ProductSortController
@@ -148,23 +148,12 @@ class GlobalSearchController: UIViewController, VTableViewDelegate, CLLocationMa
             params.main("expand", value: "_networkId:name,_brandId:name")
         } else {
             
-            params.main("expand", value: "_vitrines:address coordinates name")
+            params.main("expand", value: "_vitrines:address coordinates name _cityId")
 //            url = "vitrines"
             url = "networks"
-//            params.find("disabled", value: "false")
-//            params.find["disabled"] = "false" as AnyObject
-//            params.find("_cityId", value: GlobalConstants.Person.CityID)
-//            params.find["_cityId"] = GlobalConstants.Person.CityID as AnyObject
-////            params.main("expand", value: "_networkId:logo")
-//            params.find["expand"] = "_networkId:logo" as AnyObject
-//
-            
+
             if geoSort {
                 print("near sort")
-//                location = [locManager.location!.coordinate.longitude, locManager.location!.coordinate.latitude]
-//                params.find("coordinates", value: ["$near": location])
-                
-//                params.find["coordinates"] = ["$near": location] as AnyObject
             }
         }
         
@@ -174,33 +163,24 @@ class GlobalSearchController: UIViewController, VTableViewDelegate, CLLocationMa
         
         if let r = request {
             r.cancel()
-        }
-        
-//        request = API.get(url, params: params, headers: headers) { response in
+        }        
         request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url!)", parameters: params.get(), encoding:URLEncoding.default).responseJSON { response in
-            print("http://manager.vitrine.kz:3000/api/\(url!)")
             switch(response.result) {
             case .success(let JSON):
+                var tView = VTableViewWrapper()
                 if self.searchMode == .products {
+                    tView = self.productsTableView
                     let data = Product.fromJSONArray(JSON as AnyObject)
-                    if data.count == 0 && self.page == 1 {
-                        self.productsTableView.showEmptyMessage("Ничего не найдено")
-                    }
-                    
-//                    if(data.count < self.pageSize) {
-//                        self.productsTableView.moreDataAvailable = false
-//                    } else {
-//                        self.page += 1
-//                        print("page added")
-//                    }
-//                    self.productsTableView.products.append(contentsOf: data)
                     self.productsTableView.products = data
-                    print("productsc button")
+                    if data.count == 0  {
+                        tView.showEmptyMessage("Ничего не найдено")
+                    }
                 } else {
-                    print("vitrine button")
+                    tView = self.vitrinesTableView
                     var data = Network.fromJSONArray(JSON as AnyObject)
-                    if data.count == 0 && self.page == 1 {
-                        self.vitrinesTableView.showEmptyMessage("Ничего не найдено")
+                    self.vitrinesTableView.networks = data
+                    if data.count == 0  {
+                        tView.showEmptyMessage("Ничего не найдено")
                     }
 //                    if(data.count < self.pageSize) {
 //                        self.vitrinesTableView.moreDataAvailable = false
@@ -208,7 +188,7 @@ class GlobalSearchController: UIViewController, VTableViewDelegate, CLLocationMa
 //                        self.page += 1
 //                    }
 //                    self.vitrinesTableView.vitrines.append(contentsOf: data)
-                    self.vitrinesTableView.networks = data                    
+                    
                 }
             case .failure(let error):
                 print(error)
@@ -222,7 +202,7 @@ class GlobalSearchController: UIViewController, VTableViewDelegate, CLLocationMa
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.characters.count > 2 || searchParams.text!.characters.count > searchText.characters.count) {
+        if(searchText.characters.count > 1 || searchParams.text!.characters.count > searchText.characters.count) {
             searchParams.text = searchText
             refreshList()
         }

@@ -213,7 +213,7 @@ class ProductDetailController: UIViewController, UICollectionViewDataSource, UIS
     }
     
     fileprivate func enableSuggestionsDrawer() {
-        drawerScrollView.isScrollEnabled = true
+//        drawerScrollView.isScrollEnabled = true // turn off scrolling 
         drawerInitialPosition = drawerInitialPosition + 44
         drawerBottom.constant = drawerInitialPosition
         
@@ -278,9 +278,8 @@ class ImagePagerCell: UICollectionViewCell, UIScrollViewDelegate {
         didSet {
             
             imageView.sd_setImage(with: imageURL) { (image, error, imageCacheType, url) in
-                //didn't fix, because of the image is does not exist                 
-//                let zoomScale = max(self.bounds.size.width / (image?.size.width)!, self.bounds.size.height / (image?.size.height)!)
-                let zoomScale: CGFloat = 200
+            let zoomScale = max(self.bounds.size.width / (image?.size.width)!, self.bounds.size.height / (image?.size.height)!)
+//                let zoomScale: CGFloat = 200
                 if (zoomScale > 1) {
                     self.scrollView.minimumZoomScale = 1
                 }

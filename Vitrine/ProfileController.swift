@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class ProfileController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
 
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var city: PickerTextField!
@@ -41,13 +41,68 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     var stateToken: String = ""
     var userdef = UserDefaults.standard
     
+    //google sign in
+    
+    func sign(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url as URL!, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        SVProgressHUD.show()
+        if (error == nil) {
+            var parameter = [String : AnyObject]()
+            let userId = user.userID
+            parameter["provider"] = "google_plus" as AnyObject
+            parameter["identity"] = "\(userId!)" as AnyObject
+            var headers = [String: String]()
+            if (GlobalConstants.Person.token != nil){
+                headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
+            }
+            Alamofire.request("http://manager.vitrine.kz:3000/api/users/account", method: .post, parameters: parameter as [String : AnyObject], headers: headers).responseJSON { response in
+                switch(response.result) {
+                case .success(_):
+                        self.social_gmail.text = "Подключен"
+                        self.social_gmail_icon.image = UIImage(named: "g+_on")
+                        self.userdef.set("google_plus", forKey: "soc_google_plus")
+                case .failure(_):
+                    SVProgressHUD.showError(withStatus: "Ошибка")
+                }
+            }
+            SVProgressHUD.dismiss()
+        } else {
+            print("\(error.localizedDescription)")
+            SVProgressHUD.showError(withStatus: "Ошибка")
+        }
+    }
+    
+    
+    func sign(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        return GIDSignIn.sharedInstance().handle(url as URL!,sourceApplication: sourceApplication,annotation: annotation)
+    }
+    
+    func signIn(signIn: GIDSignIn!, dismissViewController viewController: UIViewController!) {
+        self.dismiss(animated: true) { () -> Void in
+        }
+    }
+    
+    func signIn(signIn: GIDSignIn!, presentViewController viewController: UIViewController!) {
+        self.present(viewController, animated: true) { () -> Void in
+        }
+    }
+    
+    
+    
+    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user: GIDGoogleUser!, withError error: NSError!) {
+        //Perform if user gets disconnected
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.oauth_modal = OAuthIOModal(key: "djqVkWg5yikUS6_ZxMKGoick1Kk", delegate: self)
         
@@ -69,10 +124,8 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
             PickerTextField.Item(value: "male", label: "Мужчина", pic: UIImage(named: "sex_male_on")),
             PickerTextField.Item(value: "female", label: "Женщина", pic: UIImage(named: "sex_female_on"))
         ]
-        
         update()
         
-//        API.get("cities", encoding: <#URLEncoding.Destination#>) { response in
         Alamofire.request("http://manager.vitrine.kz:3000/api/cities").responseJSON { response in
             switch(response.result) {
             case .success(let JSON):
@@ -88,11 +141,21 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
                 print(error)
             }
         }
+        if let provider = self.userdef.string(forKey: "soc_accounts"){
+            self.socAccounts(provider: provider)
+        }
+        if let socVk = self.userdef.string(forKey: "soc_vk"){
+            self.socAccounts(provider: socVk)
+        }
+        if let socFacebook = self.userdef.string(forKey: "soc_facebook"){
+            self.socAccounts(provider: socFacebook)
+        }
+        if let socGoogleplus = self.userdef.string(forKey: "soc_google_plus"){            
+            self.socAccounts(provider: socGoogleplus)
+        }
     }
 
     func update() {
-        let socAccounts = userdef.object(forKey: "soc_accounts") as? NSDictionary
-        print(socAccounts)
         if(GlobalConstants.Person.hasName()) {
             name.text = GlobalConstants.Person.Name
             surname.text = GlobalConstants.Person.Surname
@@ -126,36 +189,6 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         if (GlobalConstants.Person.hasAddress()) {
             address.text = GlobalConstants.Person.Address
         }
-        
-        
-//        if GlobalConstants.Person.inSocial(User.ACC_FB) {
-//            social_facebook.text = "Подключен"
-//            self.social_facebook_icon.image = UIImage(named: "facebook_on")
-//        }
-        if socAccounts?[User.ACC_FB] != nil {
-            social_facebook.text = "Подключен"
-            self.social_facebook_icon.image = UIImage(named: "facebook_on")
-        }
-//        if GlobalConstants.Person.inSocial(User.ACC_VK) {
-//            social_vk.text = "Подключен"
-//            self.social_vk_icon.image = UIImage(named: "vk_on")
-//        }
-        print(socAccounts?[User.ACC_VK])
-        if socAccounts?[User.ACC_VK] != nil {
-            social_vk.text = "Подключен"
-            self.social_vk_icon.image = UIImage(named: "vk_on")
-        }
-        
-//        if GlobalConstants.Person.inSocial(User.ACC_GP) {
-//            social_gmail.text = "Подключен"
-//            self.social_gmail_icon.image = UIImage(named: "gmail_on")
-//        }
-        if socAccounts?[User.ACC_GP] != nil {
-            social_gmail.text = "Подключен"
-            self.social_gmail_icon.image = UIImage(named: "gmail_on")
-        }
-        
-        
     }
     
     var imagePickMenu: UIAlertController!
@@ -165,6 +198,22 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         
         self.present(self.getImageMenu(), animated: true, completion: nil)
         
+    }
+    
+    func socAccounts(provider: String){
+        switch provider{
+        case "vk":
+            social_vk.text = "Подключен"
+            self.social_vk_icon.image = UIImage(named: "vk_on")
+        case "facebook":
+            social_facebook.text = "Подключен"
+            self.social_facebook_icon.image = UIImage(named: "facebook_on")
+        case "google_plus":
+            social_gmail.text = "Подключен"
+            self.social_gmail_icon.image = UIImage(named: "g+_on")
+        default :
+            print("nothing")
+        }
     }
     
     func getImageMenu() -> UIAlertController {
@@ -305,8 +354,9 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         
         var parameters = [String: String]()
         
-        if !city.text!.isEmpty && city.text != GlobalConstants.Person.CityName {
+        if !city.text!.isEmpty {
             parameters["_cityId"] = city.selectedItem.value
+            GlobalConstants.Person.setUserCityName(city.text!)
         }
 
         if !name.text!.isEmpty && name.text != GlobalConstants.Person.Name {
@@ -348,6 +398,7 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
             switch (response.result) {
             case .success(let JSON):
                 GlobalConstants.Person.updatePersonalData(JSON as AnyObject)
+                print("profile JSON")
                 SVProgressHUD.showSuccess(withStatus: "")
             case .failure(_):
                 SVProgressHUD.showError(withStatus: "Ошибка")
@@ -400,7 +451,17 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     }
 
     @IBAction func gLogin(_ sender: AnyObject) {
-        showModal("gmail")
+//        showModal("google_plus")
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        
+        if configureError != nil {
+        }else {
+            GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
+            GIDSignIn.sharedInstance().delegate = self
+            GIDSignIn.sharedInstance().uiDelegate = self
+            GIDSignIn.sharedInstance().signIn()
+        }
     }
     
     @IBAction func sendMsg(_ sender: Any) {
@@ -422,7 +483,7 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     
     func didReceiveOAuthIOResponse(_ request: OAuthIORequest!) {
         var params = [String:String]()
-        var identity = ""
+        var identity = "id"
         var headers = [String: String]()
         if (GlobalConstants.Person.token != nil){
             headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
@@ -431,65 +492,35 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
         request.me([]) { (data, a, b) in
             switch request.data.provider {
             case "vk":
-                print("didn't fix vk")
                 let dict = data?["raw"] as! [String:AnyObject]
-                print(dict)
-                let dict2 = dict["uid"]
-                
-                
-                for (key, value) in dict {
-                    print("\(value)")
-                    
+                for (_, value) in dict {
                     let itedict = value as! NSArray
                     for ii in itedict{
-                        let jsson = ii as! [String:AnyObject]
-                        print((jsson["first_name"] as? String)!)
-                        identity = "\((jsson["uid"] as? AnyObject)!)"
+                        let jsson = ii as? [String:AnyObject]
+                        identity = "\((jsson?["uid"] as? AnyObject)!)"
                     }
                 }
-                
-//                identity = "id"
             case "facebook":
-                print("facebook")
                 let dict = data?["raw"] as! [String:AnyObject]
-                print(dict)
-                let dict2 = dict["uid"]
-                identity = "id"
-            case "gmail":
-                print("gmail")
-                let dict = data?["raw"] as! [String:AnyObject]
-                print(dict)
-                let dict2 = dict["uid"]
-                identity = "id"
+                identity = (dict["id"] as! String)
             default:
                 print("didn't fix")
-//                identity = data?["raw"]!["email"] as! String
             }
-            
+            //gmail identity is email
             params["identity"] = identity
-//            params["identity"] = "sd"
             params["provider"] = request.data.provider
-            
-//            API.post("users/account", params: params as [String : AnyObject], encoding: <#URLEncoding.Destination#>) { response in
             Alamofire.request("http://manager.vitrine.kz:3000/api/users/account", method: .post, parameters: params as [String : AnyObject], headers: headers).responseJSON { response in                
             switch(response.result) {
-                case .success(let JSON):
+                case .success(_):
                     switch request.data.provider {
                     case "vk":
                         self.social_vk.text = "Подключен"
                         self.social_vk_icon.image = UIImage(named: "vk_on")
-                        GlobalConstants.Person.accounts["ACC_VK"] = "ok"
-                        self.userdef.set(GlobalConstants.Person.accounts, forKey: "soc_accounts")
+                        self.userdef.set("vk", forKey: "soc_vk")
                     case "facebook":
                         self.social_facebook.text = "Подключен"
                         self.social_facebook_icon.image = UIImage(named: "facebook_on")
-                        GlobalConstants.Person.accounts["ACC_FB"] = "ok"
-                        self.userdef.set(GlobalConstants.Person.accounts, forKey: "soc_accounts")
-                    case "gmail":
-                        self.social_gmail.text = "Подключен"
-                        self.social_facebook_icon.image = UIImage(named: "gmail_on")
-                        GlobalConstants.Person.accounts["ACC_GP"] = "ok"
-                        self.userdef.set(GlobalConstants.Person.accounts, forKey: "soc_accounts")
+                        self.userdef.set("facebook", forKey: "soc_facebook")
                     default:
                         print("ERROR")
                     }
@@ -517,5 +548,10 @@ class ProfileController: UITableViewController, UIImagePickerControllerDelegate,
     
     func didReceiveOAuthIOCode(_ code: String!) {
         
+    }
+    @IBAction func phoneTFchanging(_ sender: Any) {
+        if (self.phone.text?.utf16.count)! >= 11 {            
+            self.phone.resignFirstResponder()
+        }
     }
 }

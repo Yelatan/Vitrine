@@ -221,6 +221,9 @@
                                                         <userDefinedRuntimeAttribute type="image" keyPath="normalStateImage" value="phone_off"/>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="selectedStateImage" value="phone_on"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="phoneTFchanging:" destination="7u3-mL-tKB" eventType="editingChanged" id="6eS-ty-di3"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -719,7 +722,7 @@
             <objects>
                 <navigationController id="5dt-06-cMB" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="zua-k7-u5T">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="zua-k7-u5T">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

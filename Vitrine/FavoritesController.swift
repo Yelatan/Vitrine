@@ -100,16 +100,16 @@ class FavoritesController: UIViewController, VTableViewDelegate, ProductsTableVi
         params.main("expand", value: "_networkId:name,_brandId:name")
         
         if (!searchString.isEmpty) {
-//            params.find("search", value: searchString)
             params.find["search"] = searchString as AnyObject
         }
         
         if let r = request {
             r.cancel()
         }
-        //request = Alamofire.request(url, parameters: params.get(), headers: headers).responseJSON { response in
-        //"http://apivitrine.witharts.kz/api/\(url!)", parameters:params.get(),encoding:URLEncoding.default
-        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters:params.get(), headers: headers).responseJSON { response in            
+        request = Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters:params.get(), headers: headers).responseJSON { response in
+            print("http://manager.vitrine.kz:3000/api/\(url)")
+            print(params.get())
+            print(response)
             switch(response.result) {
             case .success(let JSON):
                 let products = Product.fromJSONArray(JSON as AnyObject)
@@ -124,32 +124,9 @@ class FavoritesController: UIViewController, VTableViewDelegate, ProductsTableVi
                 }
             case .failure(let error):
                 print(error)
-                }
+                self.productsTableView.showEmptyMessage("Не удалось получить ответ от сервера")
+            }
         }
-        
-        //shoudl be like above
-//        request = API.get(url, params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in switch(response.result) {
-//        request = Alamofire.request(url, headers: headers,  parameters: params.get()){ response in
-//            switch(response.result) {
-//            case .success(let JSON):
-//                let products = Product.fromJSONArray(JSON as AnyObject)
-//                self.productsTableView.products.append(contentsOf: products)
-//                
-//                if(products.count < self.pageSize) {
-//                    self.productsTableView.moreDataAvailable = false
-//                } else {
-//                    self.page += 1
-//                }
-//                
-//                if products.count == 0 && self.page == 1 {
-//                    self.productsTableView.showEmptyMessage("Ничего не найдено")
-//                }
-//            case .failure(let error):
-//                print(error)
-//                }
-//        }
-        
-
     }
     
     func productsTableView(didClickNetwork networkId: String) {

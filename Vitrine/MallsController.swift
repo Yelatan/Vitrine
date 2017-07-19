@@ -13,7 +13,7 @@ import CoreLocation
 class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     @IBOutlet var searchBar: UISearchBar!
     
-    @IBOutlet weak var mallsTableView: MallsTableView!
+    @IBOutlet weak var mallsTableView: MallsTableView!    
     @IBOutlet var menuButton: UIBarButtonItem!
     @IBOutlet var searchButton: UIBarButtonItem!
     @IBOutlet var cityButton: UIBarButtonItem!
@@ -100,7 +100,6 @@ class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
     }
     
     func vTableView<Mall>(didSelectItem item: Mall) {
@@ -117,38 +116,55 @@ class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate
         headers["Authorization"] = nil
         
         params.find["disabled"] = "false" as AnyObject
-//        params.find["_cityId"] = GlobalConstants.Person.CityID as AnyObject
         
         if let r = request {
             r.cancel()
         }
         
         if geoSort {
+            GlobalConstants.needBool = true
             location = [locManager.location!.coordinate.longitude, locManager.location!.coordinate.latitude]
-            //didn't fix
-//            params.find["coordinates"] = ["$near": location] as AnyObject
-            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token)"
+////            params.find["coordinates"] = ["$near": location] as AnyObject
+//            headers["Authorization"] = "Bearer \(GlobalConstants.Person.token)"
+            
         }else{
-            params.main("expand", value: "_vitrines:address coordinates name")
+            GlobalConstants.needBool = false
+            params.main("sort", value: "name")
+//            params.main("expand", value: "_vitrines:\(GlobalConstants.Person.CityID!)")
+//            params.main("_cityId", value: "ObjectId('\(GlobalConstants.Person.CityID!)')")
+            params.find["_cityId"] = GlobalConstants.Person.CityID as AnyObject
             
         }
-        
         if (!searchString.isEmpty) {
             params.find["search"] = searchString as AnyObject
         }
-//        request = API.get("malls", params: params, encoding: <#URLEncoding.Destination#>, headers: headers) { response in
         request = Alamofire.request("http://manager.vitrine.kz:3000/api/malls", parameters:params.get(), headers: headers).responseJSON { response in
+            var tView = VTableViewWrapper()
+            tView = self.mallsTableView
             switch(response.result) {
             case .success(let JSON):
-                let malls = Mall.fromJSONArray(JSON as AnyObject, withLocation: location)                
-                self.mallsTableView.malls.append(contentsOf: malls)
-                if(malls.count < self.pageSize) {
-                    self.mallsTableView.moreDataAvailable = false
-                }else {
-                    self.page += 1
-                }
+                self.mallsTableView.moreDataAvailable = false
+                if self.geoSort{
+                    let malls = Mall.fromJSONArray(JSON as AnyObject, withLocation: location)
+                    self.mallsTableView.malls.append(contentsOf: malls)
+                    if self.mallsTableView.malls.count == 0 {
+                        tView.showEmptyMessage("Ничего не найдено")
+                    }
+                }else{
+                    let malls = Mall.fromJSONArray(JSON as AnyObject)
+                    self.mallsTableView.malls.append(contentsOf: malls)
+                    if self.mallsTableView.malls.count == 0 {
+                        tView.showEmptyMessage("Ничего не найдено")
+                    }
+                }                
+//                if(malls.count < self.pageSize) {
+//                    self.mallsTableView.moreDataAvailable = false
+//                }else {
+//                    self.page += 1
+//                }
             case .failure(let error):
-                print(error)
+                print(error)                
+                tView.showEmptyMessage("Не удалось получить ответ от сервера")
             }
         }
     }
@@ -160,7 +176,7 @@ class MallsController: UIViewController, VTableViewDelegate, UISearchBarDelegate
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.characters.count > 2 || searchString.characters.count > searchText.characters.count) {
+        if(searchText.characters.count > 1 || searchString.characters.count > searchText.characters.count) {
             searchString = searchText
             refreshList()
         }

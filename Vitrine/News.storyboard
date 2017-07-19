@@ -16,7 +16,7 @@
             <objects>
                 <navigationController id="frs-dc-CWK" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Mct-FH-duH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="Mct-FH-duH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,7 +49,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfp-zB-JpE" userLabel="События">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="40"/>
                                         <color key="backgroundColor" red="0.086274509803921567" green="0.12156862745098039" blue="0.17254901960784313" alpha="0.80525613132911389" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Vgq-pb-eWj"/>
@@ -74,7 +74,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5H-Ey-O5e">
-                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
+                                        <rect key="frame" x="187" y="0.0" width="188" height="40"/>
                                         <color key="backgroundColor" red="0.1843137255" green="0.22352941179999999" blue="0.30196078430000001" alpha="0.79751780063291144" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="wSb-Lf-1Yr"/>
@@ -108,7 +108,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65Z-wZ-98I" customClass="NewsTableView" customModule="Vitrine" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="40" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="519"/>
                                 <subviews>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsTableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="kX5-k9-FGD" customClass="NewsTableViewCell" customModule="Vitrine" customModuleProvider="target">
                                         <rect key="frame" x="8" y="27" width="375" height="44"/>
@@ -121,23 +121,73 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.18431372940540314" green="0.22352941334247589" blue="0.30196079611778259" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <scrollView clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajh-Im-3qV" customClass="DrawerScrollView" customModule="Vitrine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="559" width="375" height="280"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPw-XB-dPn" userLabel="Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvS-Av-rpc">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="280" id="KHA-7K-Jep"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="KHA-7K-Jep"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <segue destination="p3S-VS-sWf" kind="embed" identifier="EmbeddedFilterSegue" id="bvp-Gl-yBi"/>
+                                                </connections>
+                                            </containerView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mv8-cV-nYU">
+                                                <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="2WK-i8-8Fs"/>
+                                                    <constraint firstAttribute="height" constant="30" id="jV0-lR-qWN"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="icon_footer_menu"/>
+                                                <connections>
+                                                    <action selector="didClickFilterToggle:" destination="Qbn-eC-uVD" eventType="touchUpInside" id="mnN-ui-xz9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="mv8-cV-nYU" firstAttribute="top" secondItem="mPw-XB-dPn" secondAttribute="top" constant="8" id="3Z9-TK-bbO"/>
+                                            <constraint firstAttribute="height" constant="280" id="Bva-tl-w4q"/>
+                                            <constraint firstItem="mv8-cV-nYU" firstAttribute="leading" secondItem="mPw-XB-dPn" secondAttribute="leading" constant="8" id="Fom-V2-ASB"/>
+                                            <constraint firstItem="yvS-Av-rpc" firstAttribute="leading" secondItem="mPw-XB-dPn" secondAttribute="leading" id="jbX-OO-JUY"/>
+                                            <constraint firstItem="yvS-Av-rpc" firstAttribute="top" secondItem="mPw-XB-dPn" secondAttribute="top" id="kjo-hr-Xqi"/>
+                                            <constraint firstAttribute="bottom" secondItem="yvS-Av-rpc" secondAttribute="bottom" id="xqe-9P-bbL"/>
+                                            <constraint firstAttribute="trailing" secondItem="yvS-Av-rpc" secondAttribute="trailing" id="ykb-Ee-V3n"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="mPw-XB-dPn" firstAttribute="leading" secondItem="Ajh-Im-3qV" secondAttribute="leading" id="9ds-Je-pNy"/>
+                                    <constraint firstItem="mPw-XB-dPn" firstAttribute="top" secondItem="Ajh-Im-3qV" secondAttribute="bottom" id="9fO-yg-DTs"/>
+                                    <constraint firstItem="mPw-XB-dPn" firstAttribute="width" secondItem="Ajh-Im-3qV" secondAttribute="width" id="FgD-FP-zQS"/>
+                                    <constraint firstAttribute="trailing" secondItem="mPw-XB-dPn" secondAttribute="trailing" id="h0F-3L-uhC"/>
+                                    <constraint firstAttribute="height" constant="280" id="kGi-xt-4b7"/>
+                                    <constraint firstItem="mPw-XB-dPn" firstAttribute="top" secondItem="Ajh-Im-3qV" secondAttribute="top" id="mxJ-Yw-RUK"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3qp-ck-8be" firstAttribute="top" secondItem="65Z-wZ-98I" secondAttribute="bottom" id="Dm4-aO-Fte"/>
+                            <constraint firstItem="3qp-ck-8be" firstAttribute="top" secondItem="65Z-wZ-98I" secondAttribute="bottom" constant="44" id="7BE-ue-6e6"/>
+                            <constraint firstItem="Ajh-Im-3qV" firstAttribute="centerX" secondItem="9Lx-XU-XMw" secondAttribute="centerX" id="EZY-5w-fpv"/>
                             <constraint firstItem="UUf-9G-dbi" firstAttribute="width" secondItem="9Lx-XU-XMw" secondAttribute="width" id="JRg-v5-W0H"/>
                             <constraint firstItem="UUf-9G-dbi" firstAttribute="centerX" secondItem="9Lx-XU-XMw" secondAttribute="centerX" id="Je0-3E-3cK"/>
+                            <constraint firstItem="Ajh-Im-3qV" firstAttribute="width" secondItem="9Lx-XU-XMw" secondAttribute="width" id="Ro8-Em-xH0"/>
                             <constraint firstItem="65Z-wZ-98I" firstAttribute="leading" secondItem="9Lx-XU-XMw" secondAttribute="leading" id="XnJ-iO-aRo"/>
-                            <constraint firstItem="UUf-9G-dbi" firstAttribute="top" secondItem="D9o-uF-KnQ" secondAttribute="bottom" id="eK2-KP-zCW"/>
                             <constraint firstAttribute="trailing" secondItem="65Z-wZ-98I" secondAttribute="trailing" id="j8X-o8-U8K"/>
                             <constraint firstItem="65Z-wZ-98I" firstAttribute="top" secondItem="D9o-uF-KnQ" secondAttribute="bottom" constant="40" id="mOb-fP-xYQ"/>
                             <constraint firstItem="UUf-9G-dbi" firstAttribute="top" secondItem="D9o-uF-KnQ" secondAttribute="bottom" id="wj9-Xc-FiW"/>
+                            <constraint firstItem="3qp-ck-8be" firstAttribute="top" secondItem="Ajh-Im-3qV" secondAttribute="top" constant="44" id="ylU-5S-Yhe"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="eK2-KP-zCW"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Новости" id="9dt-yj-Pma">
                         <barButtonItem key="backBarButtonItem" style="plain" id="26c-EC-f3B">
@@ -147,21 +197,23 @@
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="navbar_fav" style="plain" id="dEK-0K-dhG">
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="didClickFavButton:" destination="Qbn-eC-uVD" id="C3O-yJ-bDo"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem image="navbar_search" style="plain" id="seP-P6-Ptj">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="didClickSearchButton:" destination="Qbn-eC-uVD" id="ZLV-TB-EOB"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem style="plain" id="dEK-0K-dhG">
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="didClickFavButton:" destination="Qbn-eC-uVD" id="C3O-yJ-bDo"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="drawerScrollView" destination="Ajh-Im-3qV" id="oCk-j7-Q7M"/>
+                        <outlet property="drawerScrollViewBottom" destination="ylU-5S-Yhe" id="0uv-vY-tvC"/>
                         <outlet property="favButton" destination="dEK-0K-dhG" id="izK-kN-NDY"/>
                         <outlet property="menuButton" destination="OO3-Kv-qDt" id="RAn-c3-InS"/>
                         <outlet property="newsTableView" destination="65Z-wZ-98I" id="BdR-q9-ZDV"/>
@@ -174,7 +226,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yCJ-Kp-td2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="5ea-fL-Xl3">
+                <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Поиск" showsCancelButton="YES" id="5ea-fL-Xl3">
                     <rect key="frame" x="0.0" y="0.0" width="251" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -189,7 +241,7 @@
                     </connections>
                 </searchBar>
             </objects>
-            <point key="canvasLocation" x="780" y="549"/>
+            <point key="canvasLocation" x="713" y="549"/>
         </scene>
         <!--Новости-->
         <scene sceneID="p63-6a-Jem">
@@ -206,8 +258,21 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlO-B3-HVY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbb-DS-kbe" customClass="ImagePagerView" customModule="Vitrine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="oWd-zC-8Wg"/>
+                                            <constraint firstAttribute="height" constant="170" id="vQS-TS-fGy"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="oWd-zC-8Wg"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uL-NM-XbE" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="170" width="375" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RD6-T2-Y1j">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -360,9 +425,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="8uL-NM-XbE" secondAttribute="trailing" id="0Gt-Dx-XcX"/>
-                                    <constraint firstItem="8uL-NM-XbE" firstAttribute="top" secondItem="VlO-B3-HVY" secondAttribute="top" id="IqG-3T-6bi"/>
+                                    <constraint firstItem="tbb-DS-kbe" firstAttribute="leading" secondItem="VlO-B3-HVY" secondAttribute="leading" id="5Er-9l-nsI"/>
+                                    <constraint firstItem="tbb-DS-kbe" firstAttribute="top" secondItem="VlO-B3-HVY" secondAttribute="top" id="5ZU-xk-tgy"/>
+                                    <constraint firstItem="8uL-NM-XbE" firstAttribute="top" secondItem="tbb-DS-kbe" secondAttribute="bottom" id="EVx-8W-Iuf"/>
                                     <constraint firstAttribute="bottom" secondItem="8uL-NM-XbE" secondAttribute="bottom" id="Rxw-AR-bvQ"/>
                                     <constraint firstItem="8uL-NM-XbE" firstAttribute="width" secondItem="VlO-B3-HVY" secondAttribute="width" id="rIm-tI-JjV"/>
+                                    <constraint firstAttribute="trailing" secondItem="tbb-DS-kbe" secondAttribute="trailing" id="t2s-BU-LK1"/>
                                     <constraint firstItem="8uL-NM-XbE" firstAttribute="leading" secondItem="VlO-B3-HVY" secondAttribute="leading" id="uvi-Wu-c7R"/>
                                 </constraints>
                             </scrollView>
@@ -396,18 +464,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWF-wN-M6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbb-DS-kbe" customClass="ImagePagerView" customModule="Vitrine" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="200" id="oWd-zC-8Wg"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="oWd-zC-8Wg"/>
-                        </mask>
-                    </variation>
-                </view>
             </objects>
             <point key="canvasLocation" x="1742" y="549"/>
         </scene>
@@ -419,12 +475,22 @@
             </objects>
             <point key="canvasLocation" x="2370" y="548"/>
         </scene>
+        <!--FilterViewController-->
+        <scene sceneID="T8r-1B-p2P">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="FilterViewController" id="p3S-VS-sWf" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="B2f-iT-UcE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UmL-dZ-3Tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="712" y="1199"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="icon_footer_menu" width="72" height="72"/>
         <image name="icon_share" width="128" height="128"/>
         <image name="list_tab_default" width="20" height="20"/>
         <image name="list_tab_selected" width="20" height="20"/>
-        <image name="navbar_fav" width="22" height="22"/>
         <image name="navbar_search" width="22" height="22"/>
         <image name="reveal-icon" width="30" height="30"/>
     </resources>

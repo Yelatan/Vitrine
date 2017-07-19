@@ -57,15 +57,17 @@ class NewsDetailController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        scrollView.addParallax(with: imagePagerView, andHeight: 200, andShadow: false)
+//        scrollView.addParallax(with: imagePagerView, andHeight: 170, andShadow: false)
+//        scrollView.addSubview(imagePagerView)
         if (news.photos.count > 0 && imagePagerView.imageCount == 0) {
             for photo in news.photos {
                 imagePagerView.addImageURL(API.imageURL("news/photos", string: photo))
+                
             }
         }
         
         newsTextLabel.sizeToFit()
-        scrollContentHeight.constant = newsTextLabel.frame.size.height + 120
+        scrollContentHeight.constant = newsTextLabel.frame.size.height + 150
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

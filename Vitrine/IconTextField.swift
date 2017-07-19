@@ -38,6 +38,22 @@ import UIKit
             return _icon!
         }
     }
+    func textFieldDidChange(textField: UITextField){
+        let text = textField.text
+        if text?.utf16.count==3{
+            print("keldi")
+//            switch textField{
+//            case first:
+//                self.token += text!
+//                second.becomeFirstResponder()
+//            
+//            default:
+//                break
+//            }
+        }else{
+            
+        }
+    }
     
     override func becomeFirstResponder() -> Bool {
         return super.becomeFirstResponder()
@@ -73,7 +89,7 @@ import UIKit
         }
     }
 
-    func done(_ sender: UIButton) {
+    func done(_ sender: UIButton?) {
         resignFirstResponder()
     }
 }

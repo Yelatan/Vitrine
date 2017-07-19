@@ -22,6 +22,7 @@
 		673759421EB07EE600B1F91D /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6737593C1EB07EE600B1F91D /* Mapper.swift */; };
 		673759431EB07EE600B1F91D /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6737593D1EB07EE600B1F91D /* Operators.swift */; };
 		673759441EB07EE600B1F91D /* ToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6737593E1EB07EE600B1F91D /* ToJSON.swift */; };
+		67C0026A1F12E571006E0180 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C002691F12E571006E0180 /* GoogleService-Info.plist */; };
 		67C3517D1EA6367A00D5F95D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C3517C1EA6367A00D5F95D /* AppDelegate.swift */; };
 		67C3517F1EA6367A00D5F95D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C3517E1EA6367A00D5F95D /* ViewController.swift */; };
 		67C351821EA6367A00D5F95D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67C351801EA6367A00D5F95D /* Main.storyboard */; };
@@ -291,7 +292,6 @@
 		67C353521EA63F4F00D5F95D /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 67C3534E1EA63F4F00D5F95D /* SVProgressHUD.bundle */; };
 		67C353531EA63F4F00D5F95D /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C353501EA63F4F00D5F95D /* SVProgressHUD.m */; };
 		67C353571EA63F9400D5F95D /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C353561EA63F9400D5F95D /* UIScrollView+APParallaxHeader.m */; };
-		67C353591EA63FCF00D5F95D /* OAuthiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C353581EA63FCF00D5F95D /* OAuthiOS.framework */; };
 		67C3536C1EA6400F00D5F95D /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C3535C1EA6400F00D5F95D /* AbstractActionSheetPicker.m */; };
 		67C3536D1EA6400F00D5F95D /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C3535E1EA6400F00D5F95D /* ActionSheetCustomPicker.m */; };
 		67C3536E1EA6400F00D5F95D /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C353611EA6400F00D5F95D /* ActionSheetDatePicker.m */; };
@@ -364,6 +364,7 @@
 		6737593C1EB07EE600B1F91D /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		6737593D1EB07EE600B1F91D /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		6737593E1EB07EE600B1F91D /* ToJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToJSON.swift; sourceTree = "<group>"; };
+		67C002691F12E571006E0180 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67C351791EA6367A00D5F95D /* Vitrine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitrine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67C3517C1EA6367A00D5F95D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67C3517E1EA6367A00D5F95D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -475,7 +476,6 @@
 		67C353501EA63F4F00D5F95D /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		67C353551EA63F9400D5F95D /* UIScrollView+APParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+APParallaxHeader.h"; sourceTree = "<group>"; };
 		67C353561EA63F9400D5F95D /* UIScrollView+APParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+APParallaxHeader.m"; sourceTree = "<group>"; };
-		67C353581EA63FCF00D5F95D /* OAuthiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuthiOS.framework; sourceTree = "<group>"; };
 		67C3535B1EA6400F00D5F95D /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		67C3535C1EA6400F00D5F95D /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
 		67C3535D1EA6400F00D5F95D /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
@@ -549,7 +549,6 @@
 				67C3537F1EA6424900D5F95D /* AddressBook.framework in Frameworks */,
 				67C3537D1EA6424000D5F95D /* libsqlite3.tbd in Frameworks */,
 				67C353791EA6417400D5F95D /* libc++.tbd in Frameworks */,
-				67C353591EA63FCF00D5F95D /* OAuthiOS.framework in Frameworks */,
 				ADFA0305E5F2FDB6246A688D /* Pods_Vitrine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,6 +711,7 @@
 		67C351AD1EA6374300D5F95D /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				67C002691F12E571006E0180 /* GoogleService-Info.plist */,
 				67167DA81EF5998E00B1E7AA /* BrushScriptMT.ttf */,
 				67DC57641ECB170E00EEC5CC /* CLabsImageSlider.swift */,
 				67C3526D1EA6385800D5F95D /* SWRevealViewController */,
@@ -743,7 +743,6 @@
 				673759261EB07EAC00B1F91D /* ObjectMapper */,
 				67C353741EA6404200D5F95D /* UIScrollView-InfiniteScroll */,
 				67C3535A1EA6400300D5F95D /* Pickers */,
-				67C353581EA63FCF00D5F95D /* OAuthiOS.framework */,
 				67C353541EA63F8500D5F95D /* APParallaxHeader */,
 				67C3534A1EA63F4200D5F95D /* SVProgressHUD */,
 				67C3533B1EA63BC100D5F95D /* Parse */,
@@ -1107,6 +1106,7 @@
 			files = (
 				67C351EF1EA6380C00D5F95D /* ImagePagerView.xib in Resources */,
 				67C353171EA6391000D5F95D /* GlobalSearch.storyboard in Resources */,
+				67C0026A1F12E571006E0180 /* GoogleService-Info.plist in Resources */,
 				67C351871EA6367A00D5F95D /* LaunchScreen.storyboard in Resources */,
 				67C3530E1EA6391000D5F95D /* Favorites.storyboard in Resources */,
 				67C353521EA63F4F00D5F95D /* SVProgressHUD.bundle in Resources */,
@@ -1624,15 +1624,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9V94UZN9HR;
+				DEVELOPMENT_TEAM = 66P2HP748N;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vitrine",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/OAuth.io/Dist",
 				);
 				INFOPLIST_FILE = Vitrine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.vitrine;
@@ -1652,15 +1653,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9V94UZN9HR;
+				DEVELOPMENT_TEAM = 66P2HP748N;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vitrine",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/OAuth.io/Dist",
 				);
 				INFOPLIST_FILE = Vitrine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.vitrine;

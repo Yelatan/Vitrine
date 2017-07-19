@@ -7,4 +7,6 @@ target ‘Vitrine’ do
     pod 'SDWebImage', '~>3.8'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    pod "OAuth.io"
+    pod 'Google/SignIn'
 end

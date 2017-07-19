@@ -35,7 +35,6 @@ import UIKit
         if displayMode == .default {            
             let cell1 = Bundle.main.loadNibNamed("VitrinesTableViewCell", owner: self, options: nil)?.first as! VitrinesTableViewCell
             cell1.vitrine = vitrines[indexPath.row]
-            print("default")
             return cell1
             
         }
@@ -46,7 +45,6 @@ import UIKit
             
             let cell1 = Bundle.main.loadNibNamed("VitrinesTableViewAltCell", owner: self, options: nil)?.first as! VitrinesTableViewAltCell
             cell1.vitrine = vitrines[indexPath.row]
-            print("alt")
             return cell1
         }
     }
@@ -71,9 +69,7 @@ class VitrinesTableViewCell: UITableViewCell {
             if vitrine.photos.count > 0 {
 //                bgImageView.sd_setImage(with: API.imageURL("networks/photos", string: vitrine.photos[0]))
                 bgImageView.sd_setImage(with: API.imageURL("vitrines/photos", string: vitrine.photos[0]))
-            }
-            print("vitrine cell")
-            print(vitrine.networkLogo)
+            }            
             if vitrine.networkLogo != nil {
                 logoView.imageURL = API.imageURL("networks/logo", string: vitrine.networkLogo!)
             }

@@ -61,11 +61,12 @@ import UIKit
         scrollView.frame = bounds
         let iv = UIImageView(frame: scrollView.frame)
         iv.sd_setImage(with: url)
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleToFill
         iv.clipsToBounds = true
         iv.center.x = iv.center.x + scrollView.frame.size.width * CGFloat(imageCount - 1)
         scrollView.addSubview(iv)
         scrollView.contentSize = CGSize(width: frame.size.width * CGFloat(imageCount), height: frame.size.height)
+        scrollView.backgroundColor = .clear
         scrollView.isScrollEnabled = imageCount > 1
         pageControl.isHidden = imageCount <= 1
         

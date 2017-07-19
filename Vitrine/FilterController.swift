@@ -33,10 +33,9 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
     @IBAction func favorite(_ sender: AnyObject) {
         GlobalConstants.Person.authenticated(fromController: self) {
             print("favorite clicked function")
-            //didn't fix couldn't find request class
             self.filterDelegate?.onFavorite()
             self.favorite.isSelected = !self.favorite.isSelected
-        }
+        }        
     }
     
     override func viewDidLoad() {
@@ -110,13 +109,10 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
             url += "/\(id)"
             params.main("children", value: "1")
             if let m = mall {
-//                params.find("_mallId", value: m.id)
                 params.find["_mallId"] = m.id as AnyObject
-                
             }
             
             if let n = network {
-//                params.find("_networkId", value: n.id)
                 params.find["_networkId"] = n.id as AnyObject
             }
         } else {
@@ -129,23 +125,22 @@ class FilterController: UIViewController, UICollectionViewDelegate, UICollection
                 url = "networks/\(n.id)/\(url)"
             }
         }
-        //TO-DO
-        //Bako
-        //API.get(url, params: params, encoding: URLEncoding.Destination) { response in
-        
         Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get(), headers: headers).responseJSON { response in            
             switch response.result {
             case .success(let JSON):
                 if (id.isEmpty) {
                     self.categories = ProductCategory.fromJSONArray(JSON as AnyObject)
                 } else {
+                    GlobalConstants.showCategory = false
                     var newCategories = [ProductCategory]()
                     let parentCategory = Mapper<ProductCategory>().map((JSON as! Dictionary<String, AnyObject>)["category"])!
                     parentCategory.name = "Назад"
                     parentCategory.parentBack = true
                     newCategories.append(parentCategory)
                     newCategories.append(contentsOf: ProductCategory.fromJSONArray((JSON as! Dictionary<String, AnyObject>)["children"]!))
-                    self.categories = newCategories
+                    if GlobalConstants.showCategory {
+                        self.categories = newCategories
+                    }                    
                 }
             case .failure(let error):
                 print(error)

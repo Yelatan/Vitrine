@@ -46,7 +46,7 @@ class Product: Mappable {
     
     static func fromJSONArray(_ JSON: AnyObject) -> [Product] {
         var products = [Product]()
-        if JSON.count > 0 {
+        if JSON.count > 0 {            
             for item in JSON as! NSArray {
                 products.append(Mapper<Product>().map(item as AnyObject)!)
             }

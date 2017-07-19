@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="139" width="320" height="60"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6P-NA-TG9" customClass="RoundLogoView" customModule="Vitrine" customModuleProvider="target">
-                                <rect key="frame" x="8" y="7" width="45" height="45"/>
+                                <rect key="frame" x="8" y="7.5" width="45" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="DSA-64-KEs"/>
@@ -42,7 +42,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(╯°□°）╯︵ ┻━┻" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNS-fU-DQm">
-                                <rect key="frame" x="63" y="13" width="186" height="18"/>
+                                <rect key="frame" x="63" y="13" width="140.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Ovg-cF-21W"/>
                                 </constraints>
@@ -55,18 +55,17 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 мин назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygb-8s-c2M">
-                                <rect key="frame" x="63" y="32" width="186" height="15"/>
+                                <rect key="frame" x="63" y="32" width="140.5" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfs-9b-lR7">
-                                <rect key="frame" x="254" y="19" width="66" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 KM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfs-9b-lR7">
+                                <rect key="frame" x="208.5" y="19.5" width="106.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="JV2-Eh-49x"/>
-                                    <constraint firstAttribute="width" constant="66" id="ig1-tU-dLb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -75,7 +74,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="2qp-im-lFV"/>
                             <constraint firstItem="N6P-NA-TG9" firstAttribute="centerY" secondItem="OUt-y1-kAA" secondAttribute="centerY" id="4fb-cB-bY4"/>
-                            <constraint firstAttribute="trailing" secondItem="Bfs-9b-lR7" secondAttribute="trailing" id="58q-rI-a4M"/>
+                            <constraint firstAttribute="trailing" secondItem="Bfs-9b-lR7" secondAttribute="trailing" constant="5" id="58q-rI-a4M"/>
                             <constraint firstItem="N6P-NA-TG9" firstAttribute="leading" secondItem="OUt-y1-kAA" secondAttribute="leadingMargin" id="6Mo-ck-HQZ"/>
                             <constraint firstItem="ygb-8s-c2M" firstAttribute="top" secondItem="fNS-fU-DQm" secondAttribute="bottom" constant="1" id="DfA-GG-5AK"/>
                             <constraint firstItem="Bfs-9b-lR7" firstAttribute="leading" secondItem="fNS-fU-DQm" secondAttribute="trailing" constant="5" id="PqB-wP-Huu"/>
@@ -94,7 +93,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="8Rr-cU-H4h">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ryba_big_photo" translatesAutoresizingMaskIntoConstraints="NO" id="8Rr-cU-H4h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                     </imageView>
                 </subviews>

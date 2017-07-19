@@ -23,7 +23,6 @@ class FavoriteProductButton: UIButton {
             headers = [String: String]()
             headers["Authorization"] = "Bearer \(GlobalConstants.Person.token!)"
         }
-        print("did press favorites countroller")
         GlobalConstants.Person.authenticated(fromController: (self.window?.rootViewController)!) {
             let url = "users/favorite-product"
             var params = ["provider":"site"]
@@ -41,7 +40,6 @@ class FavoriteProductButton: UIButton {
             } else {
                 params = ["_id": self.productId]
                 Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", method: .post, parameters: params, headers: headers).responseJSON { response in
-                    print("product id \(self.productId)")
                     switch(response.result) {
                         case .success(_):
                             GlobalConstants.Person.addFavProd(self.productId)

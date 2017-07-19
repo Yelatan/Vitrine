@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import CoreLocation
 
 @IBDesignable class NetworkTableView: VTableViewWrapper {
     override var cellReuseIdentifiers: [String] {
@@ -41,6 +41,7 @@ import UIKit
 
 
 class NetworkTableViewCell: UITableViewCell {
+    var locManager = CLLocationManager()
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var logoView: RoundLogoView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -56,7 +57,26 @@ class NetworkTableViewCell: UITableViewCell {
             if network.logo != nil {
                 logoView.imageURL = API.imageURL("networks/logo", string: network.logo!)
             }
-            rangeLabel.text = ""
+            rangeLabel.text = "asd asd"
+            let locValue:CLLocationCoordinate2D = locManager.location!.coordinate
+            let locDouble = [locValue.latitude, locValue.longitude]
+            
+            var rangeLab = 0.0
+            if !network.vitrines.isEmpty{
+                rangeLab = network.vitrines[0].calcDistance(network.vitrines[0].coordinates)
+            }
+            
+            let roundedValue1 = NSString(format: "%.1f KM", rangeLab)
+            let boolGlob = GlobalConstants.needBool
+//            if rangeLab  0.0 || !boolGlob{
+
+            if rangeLab < 0.0 || !boolGlob{
+                //            if rangeLab < 0.0{
+                rangeLabel.text = ""
+            } else {
+                rangeLabel.text = roundedValue1 as String
+            }
+            
             if network.vitrines.count == 1 {
                 detailLabel.text = "\(network.vitrines[0].address)"
             } else if network.vitrines.count > 1 {

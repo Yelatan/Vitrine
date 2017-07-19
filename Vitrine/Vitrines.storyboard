@@ -177,7 +177,7 @@
                     </connections>
                 </searchBar>
             </objects>
-            <point key="canvasLocation" x="295" y="215"/>
+            <point key="canvasLocation" x="294.5" y="214.5"/>
         </scene>
         <!--Product-->
         <scene sceneID="t7U-Km-Kw5">
@@ -193,7 +193,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="FilterViewController" id="oY5-7r-vUS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mul-Li-dkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="294" y="888"/>
+            <point key="canvasLocation" x="793" y="534"/>
         </scene>
     </scenes>
     <resources>

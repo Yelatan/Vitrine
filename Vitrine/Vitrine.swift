@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Vitrine: Mappable, MapObject {
+    var locManager = CLLocationManager()
     var id: String = ""
     var name: String = ""
     var address: String = ""
@@ -25,6 +27,8 @@ class Vitrine: Mappable, MapObject {
     var networkDescription: String?
     var distance = -1.0
     var whatVitrine = ""
+    var vitriness = [Vitrine]()
+    var courdDouble = [Double]()
     
     required init?(_ map: Map) {
         
@@ -48,6 +52,8 @@ class Vitrine: Mappable, MapObject {
         networkLogo <- map["logo"]
         networkName <- map["_networkId.name"]
         networkDescription <- map["_networkId.description"]
+        vitriness <- map["_vitrines"]
+        
     }
     
     static func fromJSONArray(_ JSON: AnyObject) -> [Vitrine] {
@@ -55,13 +61,33 @@ class Vitrine: Mappable, MapObject {
         if JSON.count > 0 {
             for item in JSON as! NSArray {
                 let v = Mapper<Vitrine>().map(item as AnyObject)!
+                
                 vitrines.append(v)
+                v.distance = (v.calcDistance((v.coordinates)))
             }
         }
         return vitrines
     }
     
     static func fromJSONArray(_ JSON: AnyObject, withLocation loc: [Double]) -> [Vitrine] {
+        
+        
+        var vitrines = [Vitrine]()
+        if JSON.count > 0 {
+            for item in JSON as! NSDictionary {
+                let v = Mapper<Vitrine>().map(item as AnyObject)
+                
+                v?.distance = (v!.calcDistance((v?.coordinates)!))
+                if v != nil {
+                    vitrines.append(v!)
+                }else{
+                }
+            }
+        }
+        return vitrines
+    }
+    
+    static func fromJSONArrayDict(_ JSON: AnyObject, withLocation loc: [Double]) -> [Vitrine] {
         var vitrines = [Vitrine]()
         if JSON.count > 0 {
             for item in JSON as! NSDictionary {
@@ -76,28 +102,23 @@ class Vitrine: Mappable, MapObject {
         return vitrines
     }
     
-    static func fromJSONArrayDict(_ JSON: AnyObject, withLocation loc: [Double]) -> [Vitrine] {
-        var vitrines = [Vitrine]()
-        if JSON.count > 0 {
-            for item in JSON as! NSArray {
-                let v = Mapper<Vitrine>().map(item as AnyObject)
-                v?.distance = (v!.calcDistance(loc))
-                if v != nil {
-                    vitrines.append(v!)
-                }else{
-                }
-            }
-        }
-        return vitrines
-    }
-    
     
     func calcDistance(_ location: [Double]) -> Double {
         if !location.isEmpty {
-            let loc1 = CLLocation.init(latitude: location[1], longitude: location[0])
-            let loc2 = CLLocation.init(latitude: self.coordinates[1], longitude: self.coordinates[0])
-            return loc1.distance(from: loc2)/1000
+            
+
+            let locValue:CLLocationCoordinate2D = locManager.location!.coordinate
+            let locDouble = [locValue.latitude, locValue.longitude]
+
+            
+            let coordinate1 = CLLocation(latitude: location[1], longitude: location[0])
+            let coordinate2 = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+            let distanceInMeters = coordinate1.distance(from: coordinate2) as Double
+            self.courdDouble.append(distanceInMeters/1000)
+            return distanceInMeters/1000            
+            
         } else {
+            self.courdDouble.append(-1.0)
             return -1.0
         }
     }

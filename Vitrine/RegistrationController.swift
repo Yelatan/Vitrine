@@ -117,7 +117,8 @@ class RegistrationController: UIViewController, UITextFieldDelegate {
             let parameters = ["email":emailField.text!, "password":passwordField.text!]
             
 //            API.post("users/register", params: parameters as [String : AnyObject]) { response in
-                Alamofire.request("http://manager.vitrine.kz:3000/api/users/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in                
+                Alamofire.request("http://manager.vitrine.kz:3000/api/users/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+                    print(response)
                 if let JSON = response.result.value {
                     let responseJson = JSON as! Dictionary<String, AnyObject>
                     
@@ -138,7 +139,8 @@ class RegistrationController: UIViewController, UITextFieldDelegate {
                         
                         SVProgressHUD.dismiss()
                         super.dismiss(animated: true, completion: {})
-                        (super.parent as! AuthNavigationController).success()
+//                        (super.parent as! AuthNavigationController).success()
+                        super.performSegue(withIdentifier: "loginPush", sender: nil)
                     }
                 }else{
                     print("not response JSON")

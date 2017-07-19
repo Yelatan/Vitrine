@@ -24,12 +24,9 @@ class ProductSortBrandsController: UITableViewController {
         }
         
         if let n = network {
-            url = "networks/\(n.id)/\(url)"
+            url = "brands?shop_id=\(n.id)"
         }
-
-        
-//        API.get(url, params: nil) {
-        Alamofire.request(url, parameters: nil).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)").responseJSON { response in            
             switch(response.result) {
             case .success(let JSON):
                 let br = Brand(withName: "Все бренды")

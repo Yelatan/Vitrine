@@ -47,7 +47,9 @@ class ProductSortCategoriesController: UITableViewController {
 //        API.get(url, params: params, encoding: <#URLEncoding.Destination#>) { response in
         //Alamofire.request("http://apivitrine.witharts.kz/api/users/login", parameters: params as [String : AnyObject]).responseJSON { response in
         //Bako
-        Alamofire.request(url, parameters: params.get()).responseJSON { response in
+        Alamofire.request("http://manager.vitrine.kz:3000/api/\(url)", parameters: params.get()).responseJSON { response in
+            print("category sort")
+            print(response)
             switch response.result {
             case .success(let JSON):
                 self.categories = [ProductCategory]()

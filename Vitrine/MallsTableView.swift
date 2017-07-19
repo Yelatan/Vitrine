@@ -11,6 +11,9 @@ import UIKit
 
 
 @IBDesignable class MallsTableView: VTableViewWrapper {
+    
+    
+    let locDouble = [CLLocationManager().location!.coordinate.latitude, CLLocationManager().location!.coordinate.longitude]
     override var cellReuseIdentifiers: [String] {
         return [String(describing: MallsTableViewCell.self)]
     }
@@ -26,9 +29,9 @@ import UIKit
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell1 = Bundle.main.loadNibNamed("MallsTableViewCell", owner: self, options: nil)?.first as! MallsTableViewCell
-        cell1.mall = malls[indexPath.row]
-        return cell1
+        let cell = Bundle.main.loadNibNamed("MallsTableViewCell", owner: self, options: nil)?.first as! MallsTableViewCell
+        cell.mall = malls[indexPath.row]
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
@@ -44,25 +47,32 @@ class MallsTableViewCell: UITableViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var rangeLabel: UILabel!
     @IBOutlet weak var mallLogo: RoundLogoView!
+    var locManager = CLLocationManager()
     
     var mall: Mall! {
         didSet {
-            //didn't fix ubral distance calc and photos
+            let locValue:CLLocationCoordinate2D = locManager.location!.coordinate
+            let locDouble = [locValue.longitude, locValue.latitude]            
             if mall.photos.count > 0 {
                 picView.sd_setImage(with: API.imageURL("malls/photos", string: mall.photos[0]))
             }
             if mall.logo != nil {
-                mallLogo.imageURL = API.imageURL("malls/logo", string: mall.logo!)
+//                mallLogo.imageURL = API.imageURL("malls/logo", string: mall.logo!)
             }
             rangeLabel.text = ""
             titleLabel.text = mall.name
             detailLabel.text = mall.address
-            if mall.distance == -1 {
+            
+            var rangeLab: Double
+            rangeLab = mall.calcDistance(locDouble)
+            let boolGlob = GlobalConstants.needBool
+            if rangeLab < 0.0 || !boolGlob{
+//            if rangeLab < 0.0{
                 rangeLabel.text = ""
             } else {
-                rangeLabel.text = "\(String(format: "%.2f", mall.distance)) КМ"
+                let roundedValue1 = NSString(format: "%.1f KM", rangeLab)
+                rangeLabel.text = roundedValue1 as String
             }
-            rangeLabel.text = ""
         }
     }
 }

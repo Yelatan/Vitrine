@@ -119,6 +119,7 @@ class User: NSObject, AuthDelegate {
         
         if let fav_prods = JSON["_favorite_products"] as? [String] {
             self.setFavList(fav_prods, forKey: User.FAV_PRODUCTS)
+            
         }
     }
     
@@ -208,6 +209,13 @@ class User: NSObject, AuthDelegate {
             Surname = getDefaults().string(forKey: SURNAME_STR)
         }
         return Surname
+    }
+    
+    func getCityName() -> String{
+        if (CityName == nil){
+            CityName = getDefaults().string(forKey: CITY_NAME_STR)
+        }
+        return CityName
     }
     
     func getAddress() -> String {
@@ -424,6 +432,9 @@ class User: NSObject, AuthDelegate {
     func hasCity() -> Bool {
         return UserDefaults.standard.string(forKey: CITY_ID_STR) != nil
     }
+    func hasCityName() -> Bool {
+        return UserDefaults.standard.string(forKey: CITY_NAME_STR) != nil
+    }
     
     func hasBirthday() -> Bool {
         return UserDefaults.standard.object(forKey: BIRTHDAY_STR) != nil
@@ -450,8 +461,16 @@ class User: NSObject, AuthDelegate {
             UserDefaults.standard.removeObject(forKey: key)
         }
         setUserCityId(CityID)
-        setUserCityName(CityName)
+        
+        if CityName != nil{
+            setUserCityName(CityName)
+        }
         refreshData()
+        if self.hasToken(){
+            favProducts.removeAll()
+        }
+//        String(GlobalConstants.Person.getFavProds().count)
+        
     }
     
     var loginHandler: ((Void) -> Void)? = nil
@@ -466,12 +485,11 @@ class User: NSObject, AuthDelegate {
             }
         } else {
             self.logout()
-            let storyboard : UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
-            let vc : LoginController = storyboard.instantiateViewController(withIdentifier: "login") as! LoginController
-            let nc = AuthNavigationController(rootViewController: vc)
+            let loginVC = UIStoryboard(name: "Authentication", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginController
+            let nc = AuthNavigationController(rootViewController: loginVC)
             nc.authDelegate = self
-            c.present(nc, animated: true, completion: nil)
-            
+            GlobalConstants.fromReveal = true
+            c.navigationController?.pushViewController(loginVC, animated: true)
         }
     }
     

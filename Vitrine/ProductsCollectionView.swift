@@ -64,6 +64,8 @@ protocol vCollectionViewDelegate {
             
             if products.count > 0 {
                 hideLoader()
+            }else if products.count == 0 {
+               hideLoader()                
             }
             else {
                 showLoader()
@@ -78,7 +80,7 @@ protocol vCollectionViewDelegate {
     var stickyHeader: UIView?
     var stickyHeaderTop: NSLayoutConstraint?
 
-    let progressView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    var progressView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -131,8 +133,7 @@ protocol vCollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductsCollectionViewCell", for: indexPath) as! ProductsCollectionViewCell
-        cell.product = products[indexPath.row]
-
+        cell.product = products[indexPath.row]        
         return cell
     }
     
@@ -211,7 +212,7 @@ protocol vCollectionViewDelegate {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var discountLabel: UILabel!
     @IBOutlet weak var discountStroke: UIView!
-    @IBOutlet weak var favButton: FavoriteProductButton!
+    @IBOutlet weak var favButton: FavoriteProductButton!    
     
     var product: Product! {
         didSet {
@@ -242,5 +243,6 @@ protocol vCollectionViewDelegate {
         super.awakeFromNib()
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.15).cgColor
+        
     }
 }

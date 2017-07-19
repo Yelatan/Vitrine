@@ -19,6 +19,9 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
     var searchString = ""
     var favorite = false
     
+    @IBOutlet weak var mallDescription: UILabel!
+    @IBOutlet weak var mallTitle: UILabel!
+    @IBOutlet weak var infoView: UIScrollView!
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchButton: UIBarButtonItem!
@@ -30,6 +33,7 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
     @IBOutlet weak var drawerScrollView: DrawerScrollView!
     @IBOutlet weak var drawerScrollViewBottom: NSLayoutConstraint!
     @IBOutlet weak var vitrinesTableView: VitrinesTableView!
+    var drawedBool = false
     
     @IBAction func didClickSearchButton(_ sender: AnyObject) {
         showSearchBar()
@@ -37,6 +41,11 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
     
     @IBAction func didClickToggleDrawerButton(_ sender: AnyObject) {
         drawerScrollView.toggle()
+        if drawedBool {
+            drawedBool = false
+        }else{
+            drawedBool = true
+        }
     }
     
     func refreshList() {
@@ -71,11 +80,14 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
         vitrinesTableView.delegate = self
         drawerScrollView.bottomConstraint = drawerScrollViewBottom
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        
+        
+        
         self.vitrinesTableView.tableView.addParallax(with: self.headerView, andHeight: 200, andShadow: false)
+//        self.vitrinesTableView.tableView.addSubview(self.headerView)
         self.vitrinesTableView.tableView.contentOffset = CGPoint(x: 0, y: -200)
         if mall.photos.count > 0 && imagePagerView.imageCount == 0 {
             for photo in mall.photos {
@@ -118,6 +130,7 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
         let params = VitrineParams()
         var headers = [String: String]()
         var url = "vitrines"
+        GlobalConstants.needBool = false
         
 //        headers["page"] = "\(page)"
 //        headers["page-size"] = "\(pageSize)"
@@ -150,19 +163,32 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
             switch response.result {
             case .success(let JSON):
                 let data = Vitrine.fromJSONArray(JSON as AnyObject)
-//                self.vitrinesTableView.vitrines.append(contentsOf: data)
                 self.vitrinesTableView.vitrines = data
                 
-                if data.count == 0 {
-                    self.notificationView.isHidden = false                    
+                if !self.drawerScrollView.isOpened{
+                    if data.count == 0 && !self.favorite{
+                        self.vitrinesTableView.showEmptyMessage("СКОРО В ДАННОМ ТРЦ ПОЯВЯТСЯ ВИТРИНЫ")
+                        self.infoView.contentOffset = CGPoint(x: 0, y: 0)
+                        self.infoView.isHidden = false
+                        self.mallTitle.text = self.mall.name
+                        self.mallDescription.text = self.mall.description
+                        self.infoView.contentOffset = CGPoint(x: 0, y:0)
+                        self.view.bringSubview(toFront: self.infoView)
+                    }else if data.count == 0 && self.favorite{
+                        self.vitrinesTableView.showEmptyMessage("У вас нет отмеченных витрин")
+                    }
                 }else{
-                    self.notificationView.isHidden = true
+                    if data.count == 0 && !self.favorite{
+                        self.vitrinesTableView.showEmptyMessage("Пусто")
+                    }else if data.count == 0 && self.favorite{
+                        self.vitrinesTableView.showEmptyMessage("У вас нет отмеченных витрин")
+                    }
                 }
                 if(data.count < self.pageSize) {
-                    self.vitrinesTableView.moreDataAvailable = false
+                    self.vitrinesTableView.moreDataAvailable = true
                 } else {
                     self.page += 1
-                }                
+                }
             case .failure(let error):
                 print(error)
                 }
@@ -176,7 +202,7 @@ class MallsDetailController: UIViewController, UISearchBarDelegate, VTableViewDe
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.characters.count > 2 || searchString.characters.count > searchText.characters.count) {
+        if(searchText.characters.count > 1 || searchString.characters.count > searchText.characters.count) {
             searchString = searchText
             refreshList()
         }

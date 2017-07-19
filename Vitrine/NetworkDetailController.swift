@@ -34,8 +34,8 @@ class NetworkDetailController: UIViewController {
         super.viewDidLayoutSubviews()
         
         if !initializedParallax {
-            initializedParallax = true
-            scrollView.addParallax(with: imagePagerView, andHeight: 200)            
+            initializedParallax = true            
+//            scrollView.addParallax(with: imagePagerView, andHeight: 200)            
         }
     }
     

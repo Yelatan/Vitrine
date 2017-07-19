@@ -56,50 +56,27 @@ class FogetPasswordController: UIViewController, UITextFieldDelegate {
     }
 
     fileprivate func recover() {
+        SVProgressHUD.show()
         let parameters = ["email": emailText.text!]
-        
-        
-        //Alamofire.request(patientIdUrl, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil)
-        
-        Alamofire.request("\(GlobalConstants.baseURL)reset_password", method: .post, parameters: parameters)
+        Alamofire.request("http://manager.vitrine.kz:3000/api/users/restore-password", method: .post, parameters: parameters)
             .responseJSON { response in
-                /*
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
-                */
-                
+                print(response)
                 if let JSON = response.result.value {
-                    
                     let UserJson = JSON as! Dictionary<String, AnyObject>
-                    let status = UserJson["status"] as? String
-                    
-                    if (status == "error") {
-                        
-                        let message = UserJson["message"] as? String
-                        SVProgressHUD.showError(withStatus: message)
-                        
-                        let Time = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-                        DispatchQueue.main.asyncAfter(deadline: Time) {
-                            SVProgressHUD.dismiss()
-                        }
-                    } else {
-                        
-                        let message = UserJson["message"] as? String
-                        SVProgressHUD.showSuccess(withStatus: message)
-                        
-                        let Time = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-                        DispatchQueue.main.asyncAfter(deadline: Time) {
-                            SVProgressHUD.dismiss()
-                        }
-                        
+//                    let status = UserJson["status"] as? String
+                    let message = UserJson["message"] as? String
+                    if message! != "No accounts were found"{
+                        SVProgressHUD.showSuccess(withStatus: "Новый пароль был выслан на указанный адрес электронной почты")
+                    }else{
+                        SVProgressHUD.showError(withStatus: "Пользователь с указанным адресом электронной почты не найден")
+                    }
+                    let Time = DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                    DispatchQueue.main.asyncAfter(deadline: Time) {
+                        SVProgressHUD.dismiss()
                     }
                 }else{
                     SVProgressHUD.dismiss()
                 }
-                
-                
         }
     }
 }
